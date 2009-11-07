@@ -1,4 +1,4 @@
-# Django settings for sequias project.
+# Django settings for sequia project.
 
 from local_settings import *
 
