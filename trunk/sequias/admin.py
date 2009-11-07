@@ -1,6 +1,6 @@
 from django.contrib import admin
 from lugar.models import Comunidad
-from sequias.models import Encuesta, Primera, Postrera, Apante, Disponibilidad, Nutricion, Organizacion, Entrevistado, Producto
+from sequias.models import Encuesta, Primera, Postrera, Apante, Disponibilidad, Nutricion, Organizacion, Entrevistado, Producto, Perdida
 from django.contrib.contenttypes import generic
 
 class EntrevistadoInline(generic.GenericStackedInline):
@@ -37,11 +37,12 @@ class EncuestaAdmin(admin.ModelAdmin):
 	save_on_top = True
 	actions_on_top = True
 	inlines = [EntrevistadoInline,PrimeraInline,PostreraInline,ApanteInline,DisponibilidadInline,NutricionInline]
-	list_display = []
+	list_display = ['entrevista',]
 	list_filter = ['fecha']
 	date_hierarchy = 'fecha'
-	search_fields = []
+	search_fields = ['entrevistado__nombre']
 
 admin.site.register(Encuesta, EncuestaAdmin)
 admin.site.register(Organizacion)
 admin.site.register(Producto)
+admin.site.register(Perdida)

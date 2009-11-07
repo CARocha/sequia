@@ -25,6 +25,7 @@ class Entrevistado(models.Model):
     
     class Meta:
         verbose_name_plural="Entrevistado"
+        
     def __unicode__(self):
         return self.nombre
 
@@ -36,9 +37,17 @@ class Producto(models.Model):
         
     def __unicode__(self):
         return self.nombre
-       
+class Perdida(models.Model):
+    nombre = models.CharField(max_length=200)
+    
+    class Meta:
+        verbose_name_plural = "Razon de perdida"
+    
+    def __unicode__(self):
+        return self.nombre
+      
 #PRODUCTO_CHOICES=((1,"Maíz"),(2,"Frijol"),(3,"Sorgo"))
-PERDIDA_CHOICES=((1,"Sequia"),(2,"Mala calidad de la semilla"),(3,"Ataque de plagas"))
+#PERDIDA_CHOICES=((1,"Sequia"),(2,"Mala calidad de la semilla"),(3,"Ataque de plagas"))
 class Primera(models.Model):
     content_type = models.ForeignKey(ContentType)
     object_id = models.IntegerField(db_index=True)
@@ -48,10 +57,11 @@ class Primera(models.Model):
     area_sembrada = models.DecimalField(max_digits=10, decimal_places=2)
     area_cosechada = models.DecimalField(max_digits=10, decimal_places=2)
     produccion = models.DecimalField(max_digits=10, decimal_places=2)
-    perdida = models.IntegerField(choices=PERDIDA_CHOICES)
+#    perdida = models.IntegerField(choices=PERDIDA_CHOICES)
+    perdida = models.ForeignKey(Perdida)
     
     class Meta:
-        verbose_name_plural="Primera"
+        verbose_name_plural="Sobre siembre de Primera"
         
     def __unicode__(self):
         return self.get_producto_display()
@@ -65,10 +75,11 @@ class Postrera(models.Model):
     area_sembrada = models.DecimalField(max_digits=10, decimal_places=2)
     area_cosechada = models.DecimalField(max_digits=10, decimal_places=2)
     produccion = models.DecimalField(max_digits=10, decimal_places=2)
-    perdida = models.IntegerField(choices=PERDIDA_CHOICES)
+#    perdida = models.IntegerField(choices=PERDIDA_CHOICES)
+    perdida = models.ForeignKey(Perdida)
     
     class Meta:
-        verbose_name_plural="Postrera"
+        verbose_name_plural="Sobre siembre de Postrera"
         
     def __unicode__(self):
         return self.get_producto_display()
@@ -82,10 +93,11 @@ class Apante(models.Model):
     area_sembrada = models.DecimalField(max_digits=10, decimal_places=2)
     area_cosechada = models.DecimalField(max_digits=10, decimal_places=2)
     produccion = models.DecimalField(max_digits=10, decimal_places=2)
-    perdida = models.IntegerField(choices=PERDIDA_CHOICES)
+#    perdida = models.IntegerField(choices=PERDIDA_CHOICES)
+    perdida = models.ForeignKey(Perdida)
     
     class Meta:
-        verbose_name_plural="Apante"
+        verbose_name_plural="Sobre siembre de Apante"
         
     def __unicode__(self):
         return self.get_producto_display()
@@ -105,7 +117,7 @@ class Disponibilidad(models.Model):
     dinero = models.DecimalField(max_digits=10, decimal_places=2)
     
     class Meta:
-        verbose_name_plural = "Disponibilidad"
+        verbose_name_plural = "Sobre la disponibilidad de alimento"
     
 class Nutricion(models.Model):
     content_type = models.ForeignKey(ContentType)
@@ -116,7 +128,7 @@ class Nutricion(models.Model):
     brazalete = models.CharField(max_length=200)
     
     class Meta:
-        verbose_name_plural="Nutricion"
+        verbose_name_plural="Sobre estado de nutrición de los niños y niñas"
         
     def __unicode__(self):
         return self.brazalete
@@ -132,4 +144,5 @@ class Encuesta(models.Model):
     disponibilidad = generic.GenericRelation(Disponibilidad)
     nutricion = generic.GenericRelation(Nutricion)
     
-
+    def entrevista(self):
+        return self.entrevistado.all()[0].nombre
