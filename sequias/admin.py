@@ -1,6 +1,6 @@
 from django.contrib import admin
 from lugar.models import Comunidad
-from sequias.models import Encuesta, Primera, Postrera, Apante, Disponibilidad, Nutricion, Organizacion, Entrevistado, Producto, Perdida
+from sequias.models import Encuesta, Primera, Postrera, Apante, Disponibilidad, Nutricion, Organizacion, Entrevistado, Producto, Perdida, Recolector
 from django.contrib.contenttypes import generic
 
 class EntrevistadoInline(generic.GenericStackedInline):
@@ -46,3 +46,4 @@ admin.site.register(Encuesta, EncuestaAdmin)
 admin.site.register(Organizacion)
 admin.site.register(Producto)
 admin.site.register(Perdida)
+admin.site.register(Recolector)
