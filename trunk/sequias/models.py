@@ -98,7 +98,7 @@ class Apante(models.Model):
     content_object = generic.GenericForeignKey()
     producto = models.ForeignKey(Producto)
     area_sembrada = models.DecimalField('Area sembrada en MZ', max_digits=10, decimal_places=2, help_text="Introduzca el area sembrada en Manzana")
-    semilla = models.CharField('Semilla para siembra', max_length=4,choices=SEMILLA_CHOICES, help_text="Tienen semilla para la siembra")
+    semilla = models.CharField('Tiene Semilla para siembra?', max_length=4,choices=SEMILLA_CHOICES, help_text="Tienen semilla para la siembra")
     
     class Meta:
         verbose_name_plural="Sobre siembre de Apante"
