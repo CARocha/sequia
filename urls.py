@@ -9,7 +9,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Example:
     # (r'^sequias/', include('sequias.foo.urls')),
-
+#    (r'^', include('sequias.urls')),
+    (r'^$', 'sequias.views.index'),
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),

@@ -1,9 +1,62 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>{% block title %}Impacto semilla{% endblock %}</title>
+
+<link rel="stylesheet" href="/media/css/style.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"</script>
+	<script type="text/javascript" src="/media/js/s3Slider.js"></script>
+	<script type="text/javascript" src="/media/js/interface.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			$("div#slider").s3Slider({
+				timeOut: 4000
+   			});
+		});
+	</script> 
+
+
+{% block extraheader %}
+{% endblock %}
+{% block extra_js %}
+{% endblock %}
 </head>
 <body>
-{% block content %} {% endblock %}
-<p>foo bar</p>
+
+		<div id="header"> <!-- empieza el header -->
+		<img src="/media/imagen/gpae1.png" width=55 height=55 alt="frijol"/>
+                {% block menu %}
+                    <ul id="main-nav" class="der"> 
+						<li><a href="/admin">Ir Administración</a></li>                    
+                    </ul>
+                {% endblock %}         
+		</div> <!-- termina el header -->   
+<div id="page-wrap">  <!-- empieza wrap -->
+        <div id="main-content"> <!-- empieza main-content -->
+            {% block content %}
+			<div id="slider">
+				<ul id="sliderContent">
+					<li class="sliderImage">
+						<img src="/media/imagen/frijol1.jpg" alt="frijol"/>
+						<span>El Frijol es una planta originaria de América que se cultiva en todo el mundo. Existen numerosas variedades y de ellas se consumen tanto las vainas verdes (judía verde o chauchas) como los granos secos.</span>
+					</li>
+					<li class="sliderImage">
+          					<img src="/media/imagen/maiz1.jpg" alt="maiz"/>
+          					<span>El Maíz es una gramínea anual originaria de las Américas introducida en Europa en el siglo XVI. Actualmente, es el cereal con mayor volumen de producción en el mundo, superando al trigo y el arroz. En la mayor parte de los países de América, el maíz constituye la base histórica de la alimentación regional y uno de los aspectos centrales de la cultura mesoamericana.</span>
+      				</li>
+					<li class="sliderImage">
+          					<img src="/media/imagen/sorgo1.jpg" alt="sorgo"/>
+          					<span>Sorgo son un género botánico de unas 20 especies de gramíneas oriundas de las regiones tropicales y subtropicales de África oriental. Se cultivan en su zona de origen, Europa, América y Asia como cereal para consumo humano, animal, en la producción de forrajes, y para la elaboración de bebidas alcohólicas. Su resistencia a la sequía y el calor lo hace un cultivo importante en regiones áridas, y es uno de los cultivos alimentarios más importantes del mundo.</span>
+      				</li>
+      				<div class="clear sliderImage"></div>
+   				</ul>
+			</div>
+            {% endblock %}
+        </div> <!-- termina el main-content -->
+   
+</div> <!-- termina wrap -->
 </body>
+<div id="footer">
+<p><a href="http://www.simas.org.ni">SIMAS 2009</a></p>
 </html>
