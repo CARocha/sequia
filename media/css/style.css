@@ -1,0 +1,112 @@
+*   { margin: 0; padding: 0; }
+body { 
+    font: 14px "Lucida Grande", Sans-Serif; 
+    color: blank;
+    background: #F3F6F7;
+}
+
+a {
+    text-decoration: none;
+}
+
+a img {
+    border: 0;
+}
+
+#page-wrap {
+    margin:6px 0 0 243px;
+    width: 841px;
+    overflow: hidden;
+}
+#main-content {
+    position: relative;
+    z-index: 100px;
+    float: left;
+    padding: 20px;
+    width: 420px;
+}
+#footer {
+    margin:-5px 0 0 262px;
+    z-index: 100px;
+    background: rgba(0,2,4,0.8);
+    padding: 11px;
+    width: 680px;
+}
+#footer a {
+    color: #F3F6F7;
+}
+#footer p {
+    margin: 0 0 0 290px;
+}
+
+#header {
+    margin:6px 0 0 252px;
+    padding: 8px;
+    width: 702px;
+    overflow: hidden;
+}
+#header li {
+    float: left;
+    list-style-type:none;
+    list-style-position:outside;
+}
+#header a{
+    margin: 6px 6px 6px 6px;
+    padding: 4px;
+}
+.der{
+  float:right;
+}
+/*  esto es del efecto de la foto*/
+#slider {
+   width: 727px; /* important to be same as image width */
+   height: 400px; /* important to be same as image height */  
+   position: relative; /* important */
+   overflow: hidden; /* important */
+}
+
+#slider img {
+   -moz-border-radius: 20px;
+   -webkit-border-radius: 20px;
+   border-radius: 20px;
+}
+
+#sliderContent {
+   width: 700px; /* important to be same as image width or wider */
+   position: absolute; /* important */
+   top: 0; /* important */
+   margin-left: 0; /* important */
+}
+
+.sliderImage {
+   float: left; /* important */
+   position: relative; /* important */
+   display: none; /* important */
+}
+
+.sliderImage span {
+   position: absolute; /* important */
+   font: 10px/15px Arial, Helvetica, sans-serif;
+   padding: 10px 13px;
+   width: 674px;
+   background-color: #000;
+   filter: alpha(opacity=70); /* here you can set the opacity of box with text */
+   -moz-opacity: 0.7; /* here you can set the opacity of box with text */
+   -khtml-opacity: 0.7; /* here you can set the opacity of box with text */
+   opacity: 0.7; /* here you can set the opacity of box with text */
+   color: #fff;
+   display: none; /* important */
+   left: 0;
+   bottom: 0;
+
+   /*
+       if you put
+       top: 0; -> the box with text will be shown at the top of the image
+       if you put
+       bottom: 0; -> the box with text will be shown at the bottom of the image
+   */
+}
+
+.clear {
+   clear: both;
+}
