@@ -1,8 +1,9 @@
 *   { margin: 0; padding: 0; }
-body { 
-    font: 14px "Lucida Grande", Sans-Serif; 
-    color: blank;
-    background: #FFFFFF;
+body {
+    font-size: 14;
+    font-family: Sans-Serif, Arial, Verdana; 
+    color: black;
+    background-color: #FFFFFF;
 }
 
 a {
@@ -40,22 +41,43 @@ a img {
 }
 
 #header {
-    margin:6px 0 0 252px;
-    padding: 8px;
+    margin:0px 0 0 263px;
+    padding: 0px;
     width: 702px;
     overflow: hidden;
 }
-#header li {
-    float: left;
+#header ul {
+    float: right;
     list-style-type:none;
     list-style-position:outside;
+    margin-left: -172px;
+    font-weight: normal;
+   
 }
 #header a{
-    margin: 6px 6px 6px 6px;
+    margin: 6px;
     padding: 4px;
 }
+#main-nav a {
+    color:black;
+    text-decoration:none;
+    display:block;
+    line-height: 27px;
+    padding: 0px 10px;
+    z-index: 100;
+}
+#main-nav a:hover {
+    text-decoration:underline;
+    color:#339900;
+}
+#main-nav li {
+    float:left;
+    margin: -21px;
+    padding: 11px;
+    display:block;
+}
 .der{
-  float:right;
+    float:right;
 }
 /*  esto es del efecto de la foto*/
 #slider {
