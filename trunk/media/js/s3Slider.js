@@ -15,7 +15,7 @@
     $.fn.s3Slider = function(vars) {       
         
         var element     = this;
-        var timeOut     = (vars.timeOut != undefined) ? vars.timeOut : 3000;
+        var timeOut     = (vars.timeOut != undefined) ? vars.timeOut : 4000;
         var current     = null;
         var timeOutFn   = null;
         var faderStat   = true;
