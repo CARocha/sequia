@@ -50,13 +50,16 @@ a img {
     float: right;
     list-style-type:none;
     list-style-position:outside;
-    margin-left: -172px;
     font-weight: normal;
+    margin-top: 40px;
    
 }
 #header a{
     margin: 6px;
     padding: 4px;
+}
+#header img {
+    float:left;
 }
 #main-nav a {
     color:black;
@@ -71,64 +74,73 @@ a img {
     color:#339900;
 }
 #main-nav li {
-    float:left;
-    margin: -21px;
-    padding: 11px;
     display:block;
+    float:left;
 }
 .der{
     float:right;
 }
+hr {
+	border-width:1px;
+	border-style:dashed;
+	border-color:#80a384;
+	border-left:none;
+	border-right:none;
+	width: 699px;
+	margin:3px 0 0 20px;
+}
 /*  esto es del efecto de la foto*/
-#slider {
-   width: 727px; /* important to be same as image width */
-   height: 400px; /* important to be same as image height */  
-   position: relative; /* important */
-   overflow: hidden; /* important */
+#slider1 {
+    width: 700px; /* important to be same as image width */
+    height: 400px; /* important to be same as image height */
+    position: relative; /* important */
+	overflow: hidden; /* important */
 }
 
-#slider img {
-   -moz-border-radius: 20px;
-   -webkit-border-radius: 20px;
-   border-radius: 20px;
+#slider1Content {
+    width: 700px; /* important to be same as image width or wider */
+    position: absolute;
+	top: 0;
+	margin-left: 0;
 }
-
-#sliderContent {
-   width: 700px; /* important to be same as image width or wider */
-   position: absolute; /* important */
-   top: 0; /* important */
-   margin-left: 0; /* important */
+.slider1Image {
+    float: left;
+    position: relative;
+	display: none;
 }
-
-.sliderImage {
-   float: left; /* important */
-   position: relative; /* important */
-   display: none; /* important */
+.slider1Image span {
+    position: absolute;
+	font: 10px/15px Arial, Helvetica, sans-serif;
+    padding: 10px 13px;
+    width: 700px;
+    background-color: #000;
+    filter: alpha(opacity=70);
+    -moz-opacity: 0.7;
+	-khtml-opacity: 0.7;
+    opacity: 0.7;
+    color: #fff;
+    display: none;
 }
-
-.sliderImage span {
-   position: absolute; /* important */
-   font: 10px/15px Arial, Helvetica, sans-serif;
-   padding: 10px 13px;
-   width: 674px;
-   background-color: #000;
-   filter: alpha(opacity=70); /* here you can set the opacity of box with text */
-   -moz-opacity: 0.7; /* here you can set the opacity of box with text */
-   -khtml-opacity: 0.7; /* here you can set the opacity of box with text */
-   opacity: 0.7; /* here you can set the opacity of box with text */
-   color: #fff;
-   display: none; /* important */
-   left: 0;
-   bottom: 0;
-
-   /*
-       if you put
-       top: 0; -> the box with text will be shown at the top of the image
-       if you put
-       bottom: 0; -> the box with text will be shown at the bottom of the image
-   */
-}
-
 .clear {
-   clear: both;
+	clear: both;
 }
+.slider1Image span strong {
+    font-size: 14px;
+}
+.left {
+	top: 0;
+    left: 0;
+	width: 110px !important;
+	height: 395px;
+}
+.right {
+	right: 0;
+	bottom: 0;
+	width: 90px !important;
+	height: 392px;
+}
+.bottom {
+	bottom: 0;
+    left: 0;
+}
+ul { list-style-type: none;}
