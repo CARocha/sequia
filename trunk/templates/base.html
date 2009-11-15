@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="/media/css/style.css" />
 	<script type="text/javascript" src="/media/js/jquery.js"></script>
 	<script type="text/javascript" src="/media/js/s3Slider.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         $('#slider1').s3Slider({
@@ -23,17 +24,19 @@
 <body>
 
 		<div id="header"> <!-- empieza el header -->
-		<img src="/media/imagen/gpae3.png" width=400 height=80 alt="gpae"/>
-                {% block menu %}
-                    <ul id="main-nav" class="der">
-						<li><a href="/">Inicio |</a></li>
-						<li><a href="/admin">Administración</a></li>                    
-                    </ul>
-                {% endblock %}         
+		<img src="/media/imagen/gpae3.png" width=570 height=78 alt="gpae"/>       
 		</div> <!-- termina el header --> 
 
 <div id="page-wrap">  <!-- empieza wrap -->
 <hr></hr> 
+<ul class="nav-menu">
+    <li><a href="/">Inicio</a></li>
+    <li><a href="#">Consultar</a></li>
+    <li><a href="#">Graficos</a></li>
+    <li><a href="/admin">Administracion</a></li>
+</ul>
+<br>
+<hr></hr>
         <div id="main-content"> <!-- empieza main-content -->
             {% block content %}
 			<div id="slider1">
