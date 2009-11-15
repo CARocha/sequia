@@ -73,8 +73,8 @@ class Primera(models.Model):
     class Meta:
         verbose_name_plural="Sobre siembre de Primera"
         
-    def __unicode__(self):
-        return self.get_producto_display()
+#    def __unicode__(self):
+#        return self.get_producto_display()
     
 class Postrera(models.Model):
     content_type = models.ForeignKey(ContentType)
@@ -89,8 +89,9 @@ class Postrera(models.Model):
     class Meta:
         verbose_name_plural="Sobre siembre de Postrera"
         
-    def __unicode__(self):
-        return self.get_producto_display()
+#    def __unicode__(self):
+#        return self.get_producto_display()
+    
 SEMILLA_CHOICES=(("si","Si"),("no","No"))    
 class Apante(models.Model):
     content_type = models.ForeignKey(ContentType)
@@ -103,8 +104,8 @@ class Apante(models.Model):
     class Meta:
         verbose_name_plural="Sobre siembre de Apante"
         
-    def __unicode__(self):
-        return self.get_producto_display()
+#    def __unicode__(self):
+#        return self.get_producto_display()
     
 class Disponibilidad(models.Model):
     content_type = models.ForeignKey(ContentType)
