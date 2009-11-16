@@ -73,8 +73,8 @@ class Primera(models.Model):
     class Meta:
         verbose_name_plural="Sobre siembre de Primera"
         
-#    def __unicode__(self):
-#        return self.get_producto_display()
+    def __unicode__(self):
+        return self.producto.nombre
     
 class Postrera(models.Model):
     content_type = models.ForeignKey(ContentType)
@@ -89,8 +89,8 @@ class Postrera(models.Model):
     class Meta:
         verbose_name_plural="Sobre siembre de Postrera"
         
-#    def __unicode__(self):
-#        return self.get_producto_display()
+    def __unicode__(self):
+        return self.producto.nombre
     
 SEMILLA_CHOICES=(("si","Si"),("no","No"))    
 class Apante(models.Model):
@@ -104,8 +104,8 @@ class Apante(models.Model):
     class Meta:
         verbose_name_plural="Sobre siembre de Apante"
         
-#    def __unicode__(self):
-#        return self.get_producto_display()
+    def __unicode__(self):
+        return self.semilla
     
 class Disponibilidad(models.Model):
     content_type = models.ForeignKey(ContentType)
@@ -123,14 +123,18 @@ class Disponibilidad(models.Model):
     
     class Meta:
         verbose_name_plural = "Sobre la disponibilidad de alimento"
-    
+
+class Brazalete(models.Model):
+    estado = models.CharField(max_length=200)
+
+NINOS_CHOICES=(('ninos','Niños'),('ninas','Niñas'))    
 class Nutricion(models.Model):
     content_type = models.ForeignKey(ContentType)
     object_id = models.IntegerField(db_index=True)
     content_object = generic.GenericForeignKey()
-    ninos = models.CharField(max_length=50)
+    ninos = models.CharField(choices=NINOS_CHOICES, max_length=20)
     edad = models.IntegerField()
-    brazalete = models.CharField(max_length=200)
+    brazalete = models.ForeignKey(Brazalete)
     
     class Meta:
         verbose_name_plural="Sobre estado de nutrición de los niños y niñas"
@@ -149,5 +153,21 @@ class Encuesta(models.Model):
     disponibilidad = generic.GenericRelation(Disponibilidad)
     nutricion = generic.GenericRelation(Nutricion)
     
+    
     def entrevista(self):
         return self.entrevistado.all()[0].nombre
+    def comunidades(self):
+        return self.entrevistado.all()[0].comunidad   
+    def primera_perdida(self):
+        return self.primera.all()[0].perdida
+    def postrera_perdida(self):
+        return self.postrera.all()[0].perdida
+#    def apante_semilla(self):
+#        if self.apante.all()[0].semilla != None:
+#            return 0
+#        else:
+#            return self.apante.all()[0].get_semilla_display()
+    def dispone_maiz_QQ(self):
+        return self.disponibilidad.all()[0].maiz_disponible
+    def dispone_frijol_QQ(self):
+        return self.disponibilidad.all()[0].frijol_disponible
