@@ -127,7 +127,7 @@ class Disponibilidad(models.Model):
 class Brazalete(models.Model):
     estado = models.CharField(max_length=200)
 
-NINOS_CHOICES=(('ninos','Niños'),('ninas','Niñas'))    
+NINOS_CHOICES=(('ninos','Niño'),('ninas','Niña'))    
 class Nutricion(models.Model):
     content_type = models.ForeignKey(ContentType)
     object_id = models.IntegerField(db_index=True)
