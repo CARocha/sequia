@@ -143,7 +143,7 @@ class Nutricion(models.Model):
         verbose_name_plural="Sobre estado de nutrición de los niños y niñas"
         
     def __unicode__(self):
-        return self.brazalete
+        return self.brazalete.estado
     
 class Encuesta(models.Model):
     fecha = models.DateField()
