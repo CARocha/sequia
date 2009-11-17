@@ -158,16 +158,16 @@ class Encuesta(models.Model):
         return self.entrevistado.all()[0].nombre
     def comunidades(self):
         return self.entrevistado.all()[0].comunidad   
-    def primera_perdida(self):
-        return self.primera.all()[0].perdida
-    def postrera_perdida(self):
-        return self.postrera.all()[0].perdida
+#    def primera_perdida(self):
+#        return self.primera.all()[0].perdida
+#    def postrera_perdida(self):
+#        return self.postrera.all()[0].perdida
 #    def apante_semilla(self):        
 #        if self.apante.all()[0].semilla == None:
 #            return 'no existe'
 #        else:
 #            return self.apante.all()[0].get_semilla_display()
-    def dispone_maiz_QQ(self):
-        return self.disponibilidad.all()[0].maiz_disponible
-    def dispone_frijol_QQ(self):
-        return self.disponibilidad.all()[0].frijol_disponible
+#    def dispone_maiz_QQ(self):
+#        return self.disponibilidad.all()[0].maiz_disponible
+#    def dispone_frijol_QQ(self):
+#        return self.disponibilidad.all()[0].frijol_disponible
