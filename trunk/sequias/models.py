@@ -127,6 +127,9 @@ class Disponibilidad(models.Model):
 class Brazalete(models.Model):
     estado = models.CharField(max_length=200)
 
+	def __unicode__(self):
+        return self.estado
+
 NINOS_CHOICES=(('ninos','Niño'),('ninas','Niña'))    
 class Nutricion(models.Model):
     content_type = models.ForeignKey(ContentType)
