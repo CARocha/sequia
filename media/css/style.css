@@ -168,6 +168,10 @@ ul { list-style-type: none;}
 	overflow: hidden;
 	margin: auto 10px;
 }
-.nav-menu li a:hover, .nav-menu li a:active, .nav-menu li a:visited {
+.nav-menu li a:hover {
+	color: #4B9FFF;
+
+}
+.nav-menu li a:active, .nav-menu li a:visited {
 	border: none;
 }                  
