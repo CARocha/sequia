@@ -160,7 +160,9 @@ class Encuesta(models.Model):
     def entrevista(self):
         return self.entrevistado.all()[0].nombre
     def comunidades(self):
-        return self.entrevistado.all()[0].comunidad   
+        return self.entrevistado.all()[0].comunidad
+    def municipios(self):
+        return self.entrevistado.all()[0].comunidad.municipio   
 #    def primera_perdida(self):
 #        return self.primera.all()[0].perdida
 #    def postrera_perdida(self):

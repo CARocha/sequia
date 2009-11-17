@@ -37,7 +37,7 @@ class EncuestaAdmin(admin.ModelAdmin):
 	save_on_top = True
 	actions_on_top = True
 	inlines = [EntrevistadoInline,PrimeraInline,PostreraInline,ApanteInline,DisponibilidadInline,NutricionInline]
-	list_display = ['entrevista','comunidades',]
+	list_display = ['entrevista','comunidades','municipios',]
 	list_filter = ['fecha']
 	date_hierarchy = 'fecha'
 	search_fields = ['entrevistado__nombre']
