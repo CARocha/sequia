@@ -162,9 +162,9 @@ class Encuesta(models.Model):
         return self.primera.all()[0].perdida
     def postrera_perdida(self):
         return self.postrera.all()[0].perdida
-#    def apante_semilla(self):
-#        if self.apante.all()[0].semilla != None:
-#            return 0
+#    def apante_semilla(self):        
+#        if self.apante.all()[0].semilla == None:
+#            return 'no existe'
 #        else:
 #            return self.apante.all()[0].get_semilla_display()
     def dispone_maiz_QQ(self):
