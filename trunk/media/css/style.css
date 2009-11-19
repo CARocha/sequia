@@ -174,4 +174,24 @@ ul { list-style-type: none;}
 }
 .nav-menu li a:active, .nav-menu li a:visited {
 	border: none;
-}                  
+}
+/* el siderbar  */
+#sidebar {
+    float: right;
+    width: 242px;
+    margin-right: 55px;
+    padding: 16px;
+}
+
+#main-nav {
+    list-style: none;
+    }
+#main-nav li {
+    font: 16px Georgia;
+}
+#main-nav li a {
+    color: black;
+}
+#main-nav li a:hover {
+    color: green;
+}              

@@ -1,7 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//w3c//DTD XHTML 1.0 Strict//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <title>{% block title %}Sondeo de Sequia{% endblock %}</title>
+	<meta http-equiv="Content-Style-Type" content="text/css" />
 
 	<link rel="stylesheet" href="/media/css/style.css" />
 	<script type="text/javascript" src="/media/js/jquery.js"></script>
@@ -28,13 +32,15 @@
 		</div> <!-- termina el header --> 
 
 <div id="page-wrap">  <!-- empieza wrap -->
-<hr></hr> 
+<hr></hr>
+{% block menu %} 
 <ul class="nav-menu">
     <li><a href="/">Inicio</a></li>
-    <li><a href="#">Consultar</a></li>
+    <li><a href="/index">Consultar</a></li>
     <li><a href="#">Gráficos</a></li>
     <li><a href="/admin">Administración</a></li>
 </ul>
+{% endblock %}
 <br>
 <hr></hr>
         <div id="main-content"> <!-- empieza main-content -->
@@ -56,9 +62,10 @@
 			</div>
             {% endblock %}
         </div> <!-- termina el main-content -->
-   
+ <div id="sidebar"><!-- empieza siderbar-->
+	{% block siderbar %} {% endblock %} </div> <!--termina el sideber -->
 </div> <!-- termina wrap -->
 </body>
 <div id="footer">
-<p><a href="http://www.simas.org.ni">SIMAS 2009</a></p>
+<p><a href="http://www.simas.org.ni">SIMAS 2009</a></p></div>
 </html>
