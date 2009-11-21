@@ -37,7 +37,7 @@
                 }
             });
         });
-        $("#id_entrevistado").change(function () {
+        $("#id_comunidad").change(function () {
             var index = comunidad.options.selectedIndex;
             var id = comunidad.options[index].value;
             $.getJSON("/ajax/entrevista/" + id +"/",
