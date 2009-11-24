@@ -122,7 +122,7 @@ class Disponibilidad(models.Model):
     dinero = models.DecimalField('Cuanto Dinero', max_digits=10, decimal_places=2, help_text="Si tiene dinero guardado para comprar comida", null=True, blank=True)
     
     class Meta:
-        verbose_name_plural = "Sobre la disponibilidad de alimento"
+        verbose_name_plural = "Sobre la disponibilidad de alimentos"
 
 class Brazalete(models.Model):
     estado = models.CharField(max_length=200)
