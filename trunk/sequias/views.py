@@ -539,4 +539,34 @@ def grafo_nutricion(request):
     a = grafos.make_graph(lista1,legends1,mensa1,return_json=False)
     b = grafos.make_graph(lista2,legends2,mensa2,return_json=False)
     
-    return render_to_response("encuesta/grafo_nutricion.html",{'url':a,'url1':b })
+    return render_to_response("encuesta/grafo_nutricion.html",{'url':a,'url1':b, 'casos':casos })
+
+@session_required
+def grafo_disponibilidad(request):
+    fecha1=request.session['fecha_inicio']
+    fecha2=request.session['fecha_final']
+    if request.session['comunidad']:
+        com = request.session['comunidad'].id
+        if request.session['entrevistado'] !=None:
+            gdispo = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=request.session['entrevistado'])
+        else:
+            gdispo = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__comunidad__id=com)
+    elif request.session['municipio']:
+        mun = request.session['municipio'].id
+        if request.session['entrevistado'] !=None:
+            gdispo = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=request.session['entrevistado'])
+        else:
+            gdispo = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__comunidad__municipio__id=mun)
+    elif request.session['departamento']:
+        dep = request.session['departamento'].id
+        if request.session['entrevistado'] !=None:
+            gdispo = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=request.session['entrevistado'])
+        else:
+            gdispo = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__comunidad__municipio__departamento__id=dep)
+    elif request.session['entrevistado']:
+        entre = request.session['entrevistado']
+        gdispo = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=entre)
+    else:
+        gdispo = Encuesta.objects.all()
+        
+    casos = gdispo.count()
