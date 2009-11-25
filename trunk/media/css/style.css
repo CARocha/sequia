@@ -83,7 +83,7 @@ hr {
     position: absolute;
 	font: 10px/15px Arial, Helvetica, sans-serif;
     padding: 10px 13px;
-    width: 700px;
+    width: 646px;
     background-color: #000;
     filter: alpha(opacity=70);
     -moz-opacity: 0.7;
@@ -96,8 +96,26 @@ hr {
 	clear: both;
 }
 .slider1Image span strong {
-    font-size: 14px;
+    font-size: 12px;
 }
+.bottom {
+	bottom: 0;
+    left: 0;
+}
+.left {
+    top: 0;
+    left: 0;
+    width: 100px !important;
+    height: 395px;
+}
+ 
+.right {
+    right: 0;
+    bottom: 0;
+    width: 140px !important;
+    height: 392px;
+}
+ul { list-style-type: none;}
 /* Agregado por Byron */
 
 #filtros{
@@ -181,17 +199,12 @@ text-align:center;
 }
 
 /* Termina lo agregado por Byron */
-.bottom {
-	bottom: 0;
-    left: 0;
-}
-ul { list-style-type: none;}
 
 /* Esto es el Menu */
 .nav-menu {
 	position: relative;
 	height: 29px;
-	width: 455px;
+	width: 680px;
 	background-color: white;
 	padding: 10px;
 	margin: 0px 0 -15px 0;
@@ -215,7 +228,7 @@ ul { list-style-type: none;}
 	font-style: oblique;
 	font-variant: small-caps;
 	text-decoration: none;
-	color: #000;
+	color: #2DA81D;
 	outline: none;
 	text-align: center;
 	top: 7px;

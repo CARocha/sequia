@@ -80,6 +80,7 @@
     <li><a href="/disponibilidad">Disponibilidad</a></li>
     <li><a href="/nutricion">Nutrición</a></li>
     <li><a href="#">Excel</a></li>
+    <li><a href="/admin">Administración</a></li>
 </ul>
 {% endblock %}
 <br>
@@ -109,6 +110,9 @@
                       <input type="submit" value="Consultar" id="boton" class="filtro"/>
                     </fieldset>
                     </form>
+{%if mensaje%}
+                    <div id="mensaje">{{mensaje}}</div>
+{%endif%}
             {% endblock %}
            <div id="footer">
                   <p><a href="http://www.simas.org.ni">SIMAS 2009</a></p>
