@@ -85,6 +85,7 @@
 <br>
 <hr></hr>
         <div id="main-content"> <!-- empieza main-content -->
+<b>Filtros</b> :: Departamento: {{ request.session.departamento.nombre }} | Municipio: {{request.session.municipio.nombre}} | Comunidad:{{request.session.comunidad.nombre}} | Entrevistado: {{ request.session.entrevistado.nombre }}
     {% block content %}
                     <form action"." method="POST">
                     <fieldset>
