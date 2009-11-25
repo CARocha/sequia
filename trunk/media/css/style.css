@@ -346,4 +346,15 @@ tbody tr.odd td{
 padding-top:15px;
 text-align:center;
 }
-
+#mensaje{
+  border-width:1px;
+  border-style:dashed;
+  border-color:#80a384;
+  border-left:none;
+  border-right:none;
+  background-color:#83ED65;
+  background-image: url(../imagen/check.png);
+  background-repeat: no-repeat;
+  background-position:center left;
+  padding:5px 5px 5px 195px;
+}
