@@ -85,7 +85,7 @@
 <br>
 <hr></hr>
         <div id="main-content"> <!-- empieza main-content -->
-<b>Filtros</b> :: Departamento: {{ request.session.departamento.nombre }} | Municipio: {{request.session.municipio.nombre}} | Comunidad:{{request.session.comunidad.nombre}} | Entrevistado: {{ request.session.entrevistado.nombre }}
+<div id="filtros"><b>Filtros</b> :: Departamento: <i>{{ request.session.departamento.nombre }}</i> | Municipio: <i> {{request.session.municipio.nombre}}</i> | Comunidad:<i> {{request.session.comunidad.nombre}}</i> | Entrevistado: <i> {{ request.session.entrevistado.nombre }}</i></div>
     {% block content %}
                     <form action"." method="POST">
                     <fieldset>
@@ -110,6 +110,9 @@
                     </fieldset>
                     </form>
             {% endblock %}
+           <div id="footer">
+                  <p><a href="http://www.simas.org.ni">SIMAS 2009</a></p>
+            </div>
         </div> <!-- termina el main-content -->
  <div id="sidebar"><!-- empieza siderbar-->
 {% block siderbar %}
@@ -117,6 +120,4 @@
 {% endblock %} </div> <!--termina el sideber -->
 </div> <!-- termina wrap -->
 </body>
-<div id="footer">
-<p><a href="http://www.simas.org.ni">SIMAS 2009</a></p></div>
 </html>

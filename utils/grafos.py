@@ -14,7 +14,7 @@ line_types = [SimpleLineChart]
 
 def make_graph(data, legends, message=None, 
                axis_labels=None, steps=4, return_json = True,
-               type=PieChart2D, size=(400, 250), multiline=False):
+               type=PieChart2D, size=(320, 250), multiline=False):
 
     if (type in pie_types):
         graph = __pie_graphic__(data, legends, size, type)
