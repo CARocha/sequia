@@ -213,9 +213,18 @@ def disponibilidad(request):
     total_maiz=dispo.aggregate(Sum('disponibilidad__maiz_disponible'))['disponibilidad__maiz_disponible__sum']
     total_frijol=dispo.aggregate(Sum('disponibilidad__frijol_disponible'))['disponibilidad__frijol_disponible__sum']
     total_sorgo=dispo.aggregate(Sum('disponibilidad__sorgo_disponible'))['disponibilidad__sorgo_disponible__sum']
-    prom_maiz=total_maiz/casos
-    prom_frijol=total_frijol/casos
-    prom_sorgo=total_sorgo/casos
+    try:
+        prom_maiz=total_maiz/casos
+    except:
+        pass
+    try:
+        prom_frijol=total_frijol/casos
+    except:
+        pass
+    try:
+        prom_sorgo=total_sorgo/casos
+    except:
+        pass
     try:
         criterio1 = (float(total_maiz) * 100) / ((float(total_adulto) * 1) + (float(total_ninos) * 0.9))
     except:
