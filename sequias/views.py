@@ -43,7 +43,7 @@ def consultar(request):
             request.session['municipio'] = municipio 
             request.session['comunidad'] = comunidad
             request.session['entrevistado'] = entrevistado
-            mensaje = "Ahora puede seleccionar los datos con los botones de la derecha"
+            mensaje = "Explore los resultos en el menu superior"
             request.session['activo'] = True 
     else:
         form = SequiaForm()
