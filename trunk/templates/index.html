@@ -8,11 +8,15 @@
     <meta http-equiv="Content-Style-Type" content="text/css" />
 
     <link rel="stylesheet" href="/media/css/style.css" />
+    <link rel="stylesheet" href="/media/css/jquery-ui-1.7.2.custom.css" />
     <script type="text/javascript" src="/media/js/jquery.js"></script>
 	<script type="text/javascript" src="/media/js/s3Slider.js"></script>
+    <script type="text/javascript" src="/media/js/jquery-ui-1.7.2.custom.min.js"></script>
 
 <script>
         $(document).ready(function() {
+        $("#id_fecha_inicio").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#id_fecha_final").datepicker({ dateFormat: 'yy-mm-dd' });
         var departamento = document.getElementById("id_departamento");
         var municipio = document.getElementById("id_municipio");
         var comunidad= document.getElementById("id_comunidad");
@@ -56,6 +60,7 @@
         });
  });
 </script>
+
 {% block extraheader %}
 
 
@@ -85,9 +90,9 @@
                     <fieldset>
                     <div id="formulario_tabla">
                            <div class="form_label"><b>{{form.fecha_inicio.label}}</b></div>
-                           <div  class="datepicker">{{form.fecha_inicio|safe}}</div>
+                           <div  class="datepicker">{{form.fecha_inicio}}</div>
                            <div class="form_label"><b>{{form.fecha_final.label}}</b></div>
-                           <div class="datepicker">{{form.fecha_final|safe}}</div>
+                           <div class="datepicker">{{form.fecha_final}}</div>
                            <div id="general_form">
                               <div class="form_label"><b>{{form.departamento.label}}</b></div>
                               <div class="form_widget">{{form.departamento}}</div>

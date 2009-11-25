@@ -1,5 +1,11 @@
 {% extends 'index.html' %}
 
 {% block content %}
-  {{ url }}
+Números de casos: {{ casos }} familias
+<h2>Gráficos perdida primera</h2>
+<div id="primeragraf">
+<img src={{url}} /> <img src={{url1}} /> <img src={{url2}} /> <img src={{url6}} /> </div>
+<h2>Gráficos perdida postrera</h2>
+<div id="postreragraf">
+<img src={{url3}} /> <img src={{url4}} /> <img src={{url5}} /> <img src={{url7}} /> </div>
 {% endblock %}
