@@ -16,3 +16,6 @@ TIME_ZONE = 'America/Managua'
 LANGUAGE_CODE = 'es-ni'
 MEDIA_URL = 'http://localhost/'
 SECRET_KEY = '7*^jamhqiba&11qbc6ld%7*j98(0)%egb(tb14i+r=0*6oozi='
+#url default para decir que no hay datos en los grafos
+NO_DATA_GRAPH_URL = ''
+

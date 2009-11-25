@@ -4,6 +4,7 @@ from pygooglechart import GroupedHorizontalBarChart, GroupedVerticalBarChart
 from pygooglechart import Axis, SimpleLineChart
 from django.utils import simplejson
 from django.http import HttpResponse
+from settings import NO_DATA_GRAPH_URL
 
 pie_types = [PieChart3D, PieChart2D]
 bar_types = [StackedHorizontalBarChart, StackedVerticalBarChart,
@@ -26,11 +27,16 @@ def make_graph(data, legends, message=None,
 
     graph.set_title(message)
 
+    try:
+        url = graph.get_url()
+    except:
+        url = NO_DATA_GRAPH_URL 
     if return_json:
-        dicc = {'url': graph.get_url()}
+
+        dicc = {'url': url}
         return HttpResponse(simplejson.dumps(dicc), mimetype='application/javascript')
     else:
-        return graph.get_url()
+        return url 
 
 
 def __pie_graphic__(data, legends, size, type=PieChart3D):
@@ -143,6 +149,9 @@ def saca_porcentajes(values):
     total = sum(values)
     valores = [] 
     for i in range(len(values)):
-        porcentaje = (float(values[i])/total)*100
+        if total!=0:
+            porcentaje = (float(values[i])/total)*100
+        else:
+            porcentaje = 0
         valores.append("%.2f" % porcentaje + '%')
     return valores
