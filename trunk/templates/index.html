@@ -15,8 +15,8 @@
 
 <script>
         $(document).ready(function() {
-        $("#id_fecha_inicio").datepicker({ dateFormat: 'yy-mm-dd', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'] });
-        $("#id_fecha_final").datepicker({ dateFormat: 'yy-mm-dd', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'] });
+        $("#id_fecha_inicio").datepicker({ dateFormat: 'yy-mm-dd', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
+        $("#id_fecha_final").datepicker({ dateFormat: 'yy-mm-dd', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],,changeYear: true});
         var departamento = document.getElementById("id_departamento");
         var municipio = document.getElementById("id_municipio");
         var comunidad= document.getElementById("id_comunidad");
