@@ -1,8 +1,10 @@
 {% extends 'index.html' %}
 
 {% block content %}
-<h1>Estado de Nutrición</h1>
-numeros de casos: {{casos}} familias    <a href="/nutricion/grafos/">Ver Gráficos</a>
+
+<div class="titulografo"><h2>Estado de Nutrición</h2></div>
+numeros de casos: {{casos}} familias   <div id="vergrafo" class="derecha"><a href="/nutricion/grafos/">Ver Gráficos</a></div><br>
+
 <table>
 <caption>Tabla Estado de Nutrición niños</caption>
 <thead>
