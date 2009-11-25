@@ -72,20 +72,24 @@ def __bar_graphic__(data, legends, axis_labels, size, steps,
     if type==StackedHorizontalBarChart:
         graph = StackedHorizontalBarChart(size[0], size[1], x_range=(0, max_value*1.05))
         graph.set_axis_labels(Axis.BOTTOM, left_axis)
-        graph.set_axis_labels(Axis.LEFT, axis_labels)
+        if axis_labels:
+            graph.set_axis_labels(Axis.LEFT, axis_labels)
     elif type==StackedVerticalBarChart:
         graph = StackedVerticalBarChart(size[0], size[1], y_range=(0, max_value*1.05))
         graph.set_axis_labels(Axis.LEFT, left_axis)
-        graph.set_axis_labels(Axis.BOTTOM, axis_labels)
+        if axis_labels:
+            graph.set_axis_labels(Axis.BOTTOM, axis_labels)
     elif type==GroupedHorizontalBarChart:
         graph = GroupedHorizontalBarChart(size[0], size[1], x_range=(0, max_value*1.05))
         graph.set_axis_labels(Axis.BOTTOM, left_axis)
-        graph.set_axis_labels(Axis.LEFT, axis_labels)
+        if axis_labels:
+            graph.set_axis_labels(Axis.LEFT, axis_labels)
         graph.set_bar_spacing(5)
     elif type==GroupedVerticalBarChart:
         graph = GroupedVerticalBarChart(size[0], size[1], y_range=(0, max_value*1.05))
         graph.set_axis_labels(Axis.LEFT, left_axis)
-        graph.set_axis_labels(Axis.BOTTOM, axis_labels)
+        if axis_labels: 
+            graph.set_axis_labels(Axis.BOTTOM, axis_labels)
         graph.set_bar_spacing(5)
     else:
         pass #raise exception
