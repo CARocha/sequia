@@ -14,7 +14,7 @@ from decorators import session_required
 from django.views.decorators.cache import cache_page
 from django.template.loader import get_template
 from django.template import Context
-from pygooglechart import PieChart3D, StackedVerticalBarChart
+from utils.pygooglechart import PieChart3D, GroupedVerticalBarChart
 from utils import grafos
 
 def index(request):
@@ -570,3 +570,51 @@ def grafo_disponibilidad(request):
         gdispo = Encuesta.objects.all()
         
     casos = gdispo.count()
+    #conteo del maiz
+    sumatorias = gdispo.aggregate(maiz = Sum('disponibilidad__maiz_disponible'),
+                                           frijol = Sum('disponibilidad__frijol_disponible'),
+                                           sorgo = Sum('disponibilidad__sorgo_disponible')
+                                          )
+    #grafo disponibilidad
+    data = [[float(valor)] for valor in sumatorias.values()]
+        
+    legends = sumatorias.keys()
+    message = "Disponibilidad en quintales"
+    
+    url_disp = grafos.make_graph(data, legends, message, multiline=True, 
+                           return_json=False, type=GroupedVerticalBarChart)
+    #con formula rara
+    total_adulto = gdispo.aggregate(Sum('disponibilidad__adultos_casa'))['disponibilidad__adultos_casa__sum']
+    total_ninos = gdispo.aggregate(Sum('disponibilidad__ninos_casa'))['disponibilidad__ninos_casa__sum']
+    total_vacas = gdispo.aggregate(Sum('disponibilidad__vacas'))['disponibilidad__vacas__sum']
+    total_cerdos = gdispo.aggregate(Sum('disponibilidad__cerdos'))['disponibilidad__cerdos__sum']
+    total_gallinas = gdispo.aggregate(Sum('disponibilidad__gallinas'))['disponibilidad__gallinas__sum']
+    total_maiz = gdispo.aggregate(Sum('disponibilidad__maiz_disponible'))['disponibilidad__maiz_disponible__sum']
+    total_frijol = gdispo.aggregate(Sum('disponibilidad__frijol_disponible'))['disponibilidad__frijol_disponible__sum']
+    total_sorgo = gdispo.aggregate(Sum('disponibilidad__sorgo_disponible'))['disponibilidad__sorgo_disponible__sum']
+    prom_maiz = total_maiz/casos
+    prom_frijol = total_frijol/casos
+    prom_sorgo = total_sorgo/casos
+    try:
+        criterio1 = (float(total_maiz) * 100) / ((float(total_adulto) * 1) + (float(total_ninos) * 0.9))
+    except:
+        pass
+    try:
+        criterio2 = (float(total_frijol) * 100) / ((float(total_adulto) * 0.5) + (float(total_ninos) * 0.4))
+    except:
+        pass
+    try:
+        criterio3 = ((float(total_maiz) + float(total_sorgo)) * 100) / ((float(total_adulto) * 1) + (float(total_ninos) * 0.9) + (total_cerdos * 2.5)+(total_gallinas * 0.156))
+    except:
+        pass
+    
+    data = [[criterio1], [criterio2], [criterio3]]
+    legengs = ["Maiz", "Frijol", "Sorgo"]
+    message = "Disponibilidad en dias"
+
+    url_disp_formula = grafos.make_graph(data, legends, message, multiline=True, 
+                           return_json=False, type=GroupedVerticalBarChart)
+
+    dicc = {'grafo_disp': url_disp, 'grafo_disp_formula': url_disp_formula, 
+            'casos': casos}
+    return render_to_response("encuesta/grafo_disponibilidad.html", dicc)

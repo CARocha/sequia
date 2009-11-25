@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+
+{% block content %}
+Números de casos: {{ casos }} familias
+<h2>Gráficos de Disponibilidad</h2>
+<div id="primeragraf">
+    <img src={{grafo_disp}} />
+    <br/>
+    <img src={{grafo_disp_formula}} />
+</div>
+{% endblock %}
