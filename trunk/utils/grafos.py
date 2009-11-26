@@ -102,7 +102,7 @@ def __bar_graphic__(data, legends, axis_labels, size, steps,
         graph.add_data(data)
     
     graph.set_colours([ 'FFBC13','22A410','E6EC23','2B2133','BD0915','3D43BD'])
-    graph.set_bar_width(40)
+    graph.set_bar_width(44)
     graph.set_legend(legends)
     graph.set_legend_position('b')
     
