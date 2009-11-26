@@ -465,19 +465,17 @@ def grafo_perdida(request):
     mensa2_P = "Grafico Sorgo"
     mensa3_P = "Grafico razones de perdida"
     #Envios de las url solo para primera
-    a = grafos.make_graph(lista, legends, mensa, return_json=False)
-    b = grafos.make_graph(lista1, legends1, mensa1, return_json=False)
-    c = grafos.make_graph(lista2, legends2, mensa2, return_json=False)
-    g = grafos.make_graph(lista3, legends3, mensa3, return_json=False)
+    url = grafos.make_graph(lista, legends, mensa, return_json=False)
+    url1 = grafos.make_graph(lista1, legends1, mensa1, return_json=False)
+    url2 = grafos.make_graph(lista2, legends2, mensa2, return_json=False)
+    url6 = grafos.make_graph(lista3, legends3, mensa3, return_json=False)
     #Envios de las url solo para postrera
-    d = grafos.make_graph(lista_P, legends_P, mensa_P, return_json=False)
-    e = grafos.make_graph(lista1_P, legends1_P, mensa1_P, return_json=False)
-    f = grafos.make_graph(lista2_P, legends2_P, mensa2_P, return_json=False)
-    h = grafos.make_graph(lista3_P, legends3_P, mensa3_P, return_json=False)
+    url3 = grafos.make_graph(lista_P, legends_P, mensa_P, return_json=False)
+    url4 = grafos.make_graph(lista1_P, legends1_P, mensa1_P, return_json=False)
+    url5 = grafos.make_graph(lista2_P, legends2_P, mensa2_P, return_json=False)
+    url7 = grafos.make_graph(lista3_P, legends3_P, mensa3_P, return_json=False)
     
-    return render_to_response("encuesta/grafos.html",{ 'url':a, 'url1':b, 'url2':c,
-                                                       'url3':d, 'url4':e, 'url5':f, 
-                                                       'url6':g, 'url7':h, 'casos':casos })
+    return render_to_response("encuesta/grafos.html", locals())
                                                        
 @session_required
 def grafo_nutricion(request):
@@ -545,10 +543,10 @@ def grafo_nutricion(request):
     mensa1 = "Grafico Nutrición Niños"
     mensa2 = "Grafico Nutrición Niñas"
     #los link :)
-    a = grafos.make_graph(lista1,legends1,mensa1,return_json=False)
-    b = grafos.make_graph(lista2,legends2,mensa2,return_json=False)
+    url = grafos.make_graph(lista1,legends1,mensa1,return_json=False)
+    url1 = grafos.make_graph(lista2,legends2,mensa2,return_json=False)
     
-    return render_to_response("encuesta/grafo_nutricion.html",{'url':a,'url1':b, 'casos':casos })
+    return render_to_response("encuesta/grafo_nutricion.html", locals())
 
 @session_required
 def grafo_disponibilidad(request):
@@ -580,17 +578,36 @@ def grafo_disponibilidad(request):
         
     casos = gdispo.count()
     #conteo del maiz
-    sumatorias = gdispo.aggregate(maiz = Sum('disponibilidad__maiz_disponible'),
-                                           frijol = Sum('disponibilidad__frijol_disponible'),
-                                           sorgo = Sum('disponibilidad__sorgo_disponible')
-                                          )
-    #grafo disponibilidad
-    data = [[float(valor)] for valor in sumatorias.values()]
-        
-    legends = sumatorias.keys()
-    message = "Disponibilidad en quintales"
+    #TODO: sumas de toda la tabla disponibilidad
+    total_maiz=gdispo.aggregate(Sum('disponibilidad__maiz_disponible'))['disponibilidad__maiz_disponible__sum']
+    total_frijol=gdispo.aggregate(Sum('disponibilidad__frijol_disponible'))['disponibilidad__frijol_disponible__sum']
+    total_sorgo=gdispo.aggregate(Sum('disponibilidad__sorgo_disponible'))['disponibilidad__sorgo_disponible__sum']
+    try:
+        prom_maiz=float(total_maiz/casos)
+    except:
+        pass
+    try:
+        prom_frijol=float(total_frijol/casos)
+    except:
+        pass
+    try:
+        prom_sorgo=float(total_sorgo/casos)
+    except:
+        pass
     
-    url_disp = grafos.make_graph(data, legends, message, multiline=True, 
+    sumatorias = [[prom_maiz],[prom_frijol],[prom_sorgo],]
+#    sumatorias = gdispo.aggregate(maiz = Sum('disponibilidad__maiz_disponible'),
+#                                           frijol = Sum('disponibilidad__frijol_disponible'),
+#                                           sorgo = Sum('disponibilidad__sorgo_disponible')
+#                                          )
+    #grafo disponibilidad
+#    data = [[float(valor)] for valor in sumatorias.values()]
+#    data = sumatorias
+    legends = ['maiz', 'frijol', 'sorgo']        
+#    legends = sumatorias.keys()
+    message = "Quintales por familia"
+    
+    url_disp = grafos.make_graph(sumatorias, legends, message, multiline=True, 
                            return_json=False, type=GroupedVerticalBarChart)
     #con formula rara
     total_adulto = gdispo.aggregate(Sum('disponibilidad__adultos_casa'))['disponibilidad__adultos_casa__sum']
@@ -618,7 +635,7 @@ def grafo_disponibilidad(request):
         pass
     
     data = [[criterio1], [criterio2], [criterio3]]
-    legengs = ["Maiz", "Frijol", "Sorgo"]
+    legends = ["Maiz-H", "Frijol-H", "Maiz+Sorgo-H+A"]
     message = "Disponibilidad en dias"
 
     url_disp_formula = grafos.make_graph(data, legends, message, multiline=True, 
