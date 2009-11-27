@@ -630,9 +630,17 @@ def grafo_disponibilidad(request):
     casos = gdispo.count()
     #conteo del maiz
     #TODO: sumas de toda la tabla disponibilidad
-    total_maiz=gdispo.aggregate(Sum('disponibilidad__maiz_disponible'))['disponibilidad__maiz_disponible__sum']
-    total_frijol=gdispo.aggregate(Sum('disponibilidad__frijol_disponible'))['disponibilidad__frijol_disponible__sum']
-    total_sorgo=gdispo.aggregate(Sum('disponibilidad__sorgo_disponible'))['disponibilidad__sorgo_disponible__sum'] 
+    total_maiz = 0
+    total_frijol = 0
+    total_sorgo =0
+    for encuesta in gdispo:
+        for disponibilidad in encuesta.disponibilidad.all():
+            total_maiz= disponibilidad.maiz_disponible + total_maiz
+            total_frijol = disponibilidad.frijol_disponible + total_frijol
+            total_sorgo = disponibilidad.sorgo_disponible + total_sorgo
+#    total_maiz=gdispo.aggregate(Sum('disponibilidad__maiz_disponible'))['disponibilidad__maiz_disponible__sum']
+#    total_frijol=gdispo.aggregate(Sum('disponibilidad__frijol_disponible'))['disponibilidad__frijol_disponible__sum']
+#    total_sorgo=gdispo.aggregate(Sum('disponibilidad__sorgo_disponible'))['disponibilidad__sorgo_disponible__sum'] 
     try:
         prom_maiz=float(total_maiz) / casos
     except:
