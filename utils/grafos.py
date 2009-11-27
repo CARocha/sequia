@@ -25,9 +25,9 @@ def make_graph(data, legends, message=None,
         graph = __line_strip_graphic__(data, legends, axis_labels,
                                        size, steps, type, multiline)
 
-    graph.set_title(message)
 
     try:
+        graph.set_title(message)
         url = graph.get_url()
     except:
         url = NO_DATA_GRAPH_URL 
@@ -65,7 +65,16 @@ def __bar_graphic__(data, legends, axis_labels, size, steps,
         max_value = max(data)
         min_value = min(data)
 
+    #validando si hay datos para hacer grafico
+    if max_value==0:
+        return None
+
     step = ((max_value*1.05)-(min_value*0.95))/steps
+    
+    #validando en caso de el paso sea menor que uno y de cero en la conversion
+    if step<1:
+        step = 1
+
     left_axis = range(int(min_value*0.95), int(max_value*1.05), int(step))
     left_axis[0]=''
 
@@ -122,6 +131,10 @@ def __line_strip_graphic__(data, legends, axis_labels, size, steps,
     else:
         max_y = max(data)
         min_y = min(data)
+    
+    #validando si hay datos para hacer grafico
+    if max_y==0:
+        return None
 
     chart = SimpleLineChart(size[0], size[1], y_range=[0, max_y*1.05])
 
@@ -132,6 +145,11 @@ def __line_strip_graphic__(data, legends, axis_labels, size, steps,
         chart.add_data(data)
     
     step = ((max_y*1.05)-(min_y*0.95))/steps
+
+    #validando en caso de el paso sea menor que uno y de cero en la conversion
+    if step<1:
+        step = 1
+
     try:
         left_axis = range(int(min_y*0.95), int(max_y*1.05), int(step))
     except ValueError:

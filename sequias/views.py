@@ -644,15 +644,15 @@ def grafo_disponibilidad(request):
     try:
         prom_maiz=float(total_maiz) / casos
     except:
-        pass
+        prom_maiz = 0
     try:
         prom_frijol=float(total_frijol) / casos
     except:
-        pass
+        prom_frijol = 0
     try:
         prom_sorgo=float(total_sorgo) / casos
     except:
-        pass
+        prom_sorgo = 0
     
 #    sumatorias = [[prom_maiz],[prom_frijol],[prom_sorgo]]
 #    sumatorias = gdispo.aggregate(maiz = Sum('disponibilidad__maiz_disponible'),
@@ -683,15 +683,15 @@ def grafo_disponibilidad(request):
     try:
         criterio1 = (float(total_maiz) * 100) / ((float(total_adulto) * 1) + (float(total_ninos) * 0.9))
     except:
-        pass
+        criterio1 = 0
     try:
         criterio2 = (float(total_frijol) * 100) / ((float(total_adulto) * 0.5) + (float(total_ninos) * 0.4))
     except:
-        pass
+        criterio2 = 0
     try:
         criterio3 = ((float(total_maiz) + float(total_sorgo)) * 100) / ((float(total_adulto) * 1) + (float(total_ninos) * 0.9) + (total_cerdos * 2.5)+(total_gallinas * 0.156))
     except:
-        pass
+        criterio3 = 0
     
     data = [[criterio1], [criterio2], [criterio3]]
     legends = ["Maiz-H", "Frijol-H", "Maiz+Sorgo-H+A"]
