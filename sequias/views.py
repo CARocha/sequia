@@ -633,6 +633,9 @@ def grafo_disponibilidad(request):
     total_maiz = 0
     total_frijol = 0
     total_sorgo =0
+    prom_maiz = 0
+    prom_frijol = 0
+    prom_sorgo = 0
     for encuesta in gdispo:
         for disponibilidad in encuesta.disponibilidad.all():
             total_maiz= disponibilidad.maiz_disponible + total_maiz

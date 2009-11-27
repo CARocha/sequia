@@ -1,0 +1,74 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{% block title %}Sistema ADDAC-FADCANIC{% endblock %}</title>
+</head>
+		{% block content %}
+<table border=1>
+	<caption>Tabla completa con toda las encuestas</caption>
+<tr>
+<th>nombre</th>
+<th>comunidad</th>
+<th>primera producto</th>
+<th>primera area sembrada</th>
+<th>primera area cosechada</th>
+<th>primera produccion</th>
+<th>razon</th>
+<th>primera producto</th>
+<th>primera area sembrada</th>
+<th>primera area cosechada</th>
+<th>primera produccion</th>
+<th>razon</th>
+<th>primera producto</th>
+<th>primera area sembrada</th>
+<th>primera area cosechada</th>
+<th>primera produccion</th>
+<th>razon</th>
+<th>postrera producto</th>
+<th>postrera area sembrada</th>
+<th>postrera area cosechada</th>
+<th>postrera produccion</th>
+<th>razon</th>
+<th>postrera producto</th>
+<th>postrera area sembrada</th>
+<th>postrera area cosechada</th>
+<th>postrera produccion</th>
+<th>razon</th>
+<th>postrera producto</th>
+<th>postrera area sembrada</th>
+<th>postrera area cosechada</th>
+<th>postrera produccion</th>
+<th>razon</th>
+
+
+</tr>
+		{% for encuesta in encuestas.all %}
+		<tr>
+			{% for entrevistado in encuesta.entrevistado.all %}
+
+				<td>{{ entrevistado.nombre }} </td>
+				<td>{{ entrevistado.comunidad }} </td> 
+			{% endfor %} 
+				{% for primera in encuesta.primera.all %}
+				<td>{{ primera.producto }}</td>
+				<td>{{ primera.area_sembrada }}</td>
+				<td>{{ primera.area_cosechada }}</td>
+				<td>{{ primera.produccion }}</td>
+				<td>{{ primera.perdida }}</td>
+				{% endfor %}
+					{% for postrera in encuesta.postrera.all %}
+				<td>{{ postrera.producto }}</td>
+				<td>{{ postrera.area_sembrada }}</td>
+				<td>{{ postrera.area_cosechada }}</td>
+				<td>{{ postrera.produccion }}</td>
+				<td>{{ postrera.perdida }}</td>
+					{% endfor %}
+		</tr>
+
+		{% endfor %}
+
+</table>
+
+{% endblock %}
+</body>
+</html>
