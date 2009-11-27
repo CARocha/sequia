@@ -24,8 +24,6 @@ def make_graph(data, legends, message=None,
     elif(type in line_types):
         graph = __line_strip_graphic__(data, legends, axis_labels,
                                        size, steps, type, multiline)
-
-
     try:
         graph.set_title(message)
         url = graph.get_url()
@@ -73,9 +71,17 @@ def __bar_graphic__(data, legends, axis_labels, size, steps,
     
     #validando en caso de el paso sea menor que uno y de cero en la conversion
     if step<1:
-        step = 1
-    left_axis = range(int(round(min_value*0.95)), int(round(max_value*1.05))+1, int(step))
+        step = 1    
+
+    tope = int(round(max_value*1.05))
+    if tope < max_value:
+        tope+=2
+    else:
+        tope+=1
+
+    left_axis = range(int(round(min_value*0.95)), tope, int(step))
     left_axis[0]=''
+    print left_axis
 
     if type==StackedHorizontalBarChart:
         graph = StackedHorizontalBarChart(size[0], size[1], x_range=(0, max_value*1.05))
@@ -149,8 +155,14 @@ def __line_strip_graphic__(data, legends, axis_labels, size, steps,
     if step<1:
         step = 1
 
+    tope = int(round(max_value*1.05))
+    if tope < max_value:
+        tope+=2
+    else:
+        tope+=1
+
     try:
-        left_axis = range(int(round(min_y*0.95)), int(round(max_y*1.05)), int(step))
+        left_axis = range(int(round(min_y*0.95)), tope, int(step))
     except ValueError:
         #error por que los range no soportan decimales
         left_axis = range(0, 2)
