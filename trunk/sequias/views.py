@@ -775,16 +775,28 @@ def __hoja_calculo__(request):
                fila.append(0)
                fila.append(0)
                fila.append('')
-        fila.append(encuesta.disponibilidad.all()[0].adultos_casa)
-        fila.append(encuesta.disponibilidad.all()[0].ninos_casa)
-        fila.append(encuesta.disponibilidad.all()[0].vacas)
-        fila.append(encuesta.disponibilidad.all()[0].cerdos)
-        fila.append(encuesta.disponibilidad.all()[0].gallinas)
-        fila.append(encuesta.disponibilidad.all()[0].maiz_disponible)
-        fila.append(encuesta.disponibilidad.all()[0].frijol_disponible)
-        fila.append(encuesta.disponibilidad.all()[0].sorgo_disponible)
-        fila.append(encuesta.disponibilidad.all()[0].dinero)
-        
+        try:
+            fila.append(encuesta.disponibilidad.all()[0].adultos_casa)
+            fila.append(encuesta.disponibilidad.all()[0].ninos_casa)
+            fila.append(encuesta.disponibilidad.all()[0].vacas)
+            fila.append(encuesta.disponibilidad.all()[0].cerdos)
+            fila.append(encuesta.disponibilidad.all()[0].gallinas)
+            fila.append(encuesta.disponibilidad.all()[0].maiz_disponible)
+            fila.append(encuesta.disponibilidad.all()[0].frijol_disponible)
+            fila.append(encuesta.disponibilidad.all()[0].sorgo_disponible)
+            fila.append(encuesta.disponibilidad.all()[0].dinero)
+        except:
+            fila.append(0)
+            fila.append(0)
+            fila.append(0)
+            fila.append(0)
+            fila.append(0)
+            fila.append(0)
+            fila.append(0)
+            fila.append(0)
+            fila.append('')
+            
+             
 
         resultados.append(fila)
         
