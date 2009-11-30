@@ -39,34 +39,26 @@
 <th>postrera area cosechada</th>
 <th>postrera produccion</th>
 <th>razon</th>
+<th>postrera producto</th>
+<th>postrera area sembrada</th>
+<th>postrera area cosechada</th>
+<th>postrera produccion</th>
+<th>razon</th>
+<th>postrera producto</th>
+<th>postrera area sembrada</th>
+<th>postrera area cosechada</th>
+<th>postrera produccion</th>
+<th>razon</th>
 
 
 </tr>
-		{% for encuesta in encuestas.all %}
+		{% for fila in datos %}
 		<tr>
-			{% for entrevistado in encuesta.entrevistado.all %}
-
-				<td>{{ entrevistado.nombre }} </td>
-				<td>{{ entrevistado.comunidad }} </td> 
-			{% endfor %} 
-				{% for primera in encuesta.primera.all %}
-				<td>{{ primera.producto }}</td>
-				<td>{{ primera.area_sembrada }}</td>
-				<td>{{ primera.area_cosechada }}</td>
-				<td>{{ primera.produccion }}</td>
-				<td>{{ primera.perdida }}</td>
-				{% endfor %}
-					{% for postrera in encuesta.postrera.all %}
-				<td>{{ postrera.producto }}</td>
-				<td>{{ postrera.area_sembrada }}</td>
-				<td>{{ postrera.area_cosechada }}</td>
-				<td>{{ postrera.produccion }}</td>
-				<td>{{ postrera.perdida }}</td>
-					{% endfor %}
+			{% for cosito in fila %}
+				<td>{{ cosito }} </td>
+            {% endfor %}
 		</tr>
-
 		{% endfor %}
-
 </table>
 
 {% endblock %}
