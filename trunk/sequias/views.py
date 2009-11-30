@@ -16,6 +16,9 @@ from django.template.loader import get_template
 from django.template import Context
 from utils.pygooglechart import PieChart3D, GroupedVerticalBarChart
 from utils import grafos
+import ho.pisa as pisa
+import cStringIO as StringIO
+import cgi
 
 def index(request):
     return render_to_response('base.html')
@@ -706,7 +709,7 @@ def grafo_disponibilidad(request):
             'casos': casos}
     return direct_to_template(request, "encuesta/grafo_disponibilidad.html", dicc)
 
-def hoja_calculo(request):
+def __hoja_calculo__(request):
     fecha1=request.session['fecha_inicio']
     fecha2=request.session['fecha_final']
     if request.session['comunidad']:
@@ -772,7 +775,30 @@ def hoja_calculo(request):
                fila.append(0)
                fila.append(0)
                fila.append('')
+        fila.append(encuesta.disponibilidad.all()[0].adultos_casa)
+        fila.append(encuesta.disponibilidad.all()[0].ninos_casa)
+        fila.append(encuesta.disponibilidad.all()[0].vacas)
+        fila.append(encuesta.disponibilidad.all()[0].cerdos)
+        fila.append(encuesta.disponibilidad.all()[0].gallinas)
+        fila.append(encuesta.disponibilidad.all()[0].maiz_disponible)
+        fila.append(encuesta.disponibilidad.all()[0].frijol_disponible)
+        fila.append(encuesta.disponibilidad.all()[0].sorgo_disponible)
+        fila.append(encuesta.disponibilidad.all()[0].dinero)
+        
 
         resultados.append(fila)
+        
+    dict = {'datos': resultados}
+    return  dict
 
-    return render_to_response("encuesta/hoja_calculo.html", {'datos': resultados})
+@session_required
+def hoja_calculo_xls(request):
+    dict = __hoja_calculo__(request)
+    return write_xls('encuesta/hoja_calculo.html', dict, 'hoja_para_spss.xls')
+
+def write_xls(template_src, context_dict, filename):
+    response = render_to_response(template_src, context_dict)
+    response['Content-Disposition'] = 'attachment; filename='+filename
+    response['Content-Type'] = 'application/vnd.ms-excel'
+    response['Charset']='UTF-8'
+    return response
