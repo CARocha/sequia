@@ -695,7 +695,6 @@ def grafo_disponibilidad(request):
         criterio3 = ((float(total_maiz) + float(total_sorgo)) * 100) / ((float(total_adulto) * 1) + (float(total_ninos) * 0.9) + (total_cerdos * 2.5)+(total_gallinas * 0.156))
     except:
         criterio3 = 0
-    
     data = [[criterio1], [criterio2], [criterio3]]
     legends = ["Maiz-H", "Frijol-H", "Maiz+Sorgo-H+A"]
     message = "Disponibilidad en dias"
@@ -713,25 +712,67 @@ def hoja_calculo(request):
     if request.session['comunidad']:
         com = request.session['comunidad'].id
         if request.session['entrevistado'] !=None:
-            hoja = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=request.session['entrevistado'])
+            encuestas = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=request.session['entrevistado'])
         else:
-            hoja = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__comunidad__id=com)
+            encuestas = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__comunidad__id=com)
     elif request.session['municipio']:
         mun = request.session['municipio'].id
         if request.session['entrevistado'] !=None:
-            hoja = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=request.session['entrevistado'])
+            encuestas = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=request.session['entrevistado'])
         else:
-            hoja = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__comunidad__municipio__id=mun)
+            encuestas = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__comunidad__municipio__id=mun)
     elif request.session['departamento']:
         dep = request.session['departamento'].id
         if request.session['entrevistado'] !=None:
-            hoja = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=request.session['entrevistado'])
+            encuestas = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=request.session['entrevistado'])
         else:
-            hoja = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__comunidad__municipio__departamento__id=dep)
+            encuestas = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__comunidad__municipio__departamento__id=dep)
     elif request.session['entrevistado']:
         entre = request.session['entrevistado']
-        hoja = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=entre)
+        encuestas= Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=entre)
     else:
-        hoja = Encuesta.objects.all()
-        
-    return render_to_response("encuesta/hoja_calculo.html", {'encuestas':hoja})
+        encuestas = Encuesta.objects.all()
+
+    resultados = []
+
+    #modelo de fila
+    #[nombre, comunidad, primera producto, primera area sembrada, pri area cosechada, pri produccion pri perdida]
+    for encuesta in encuestas:
+        fila = []
+        fila.append(encuesta.entrevistado.all()[0].nombre)
+        fila.append(encuesta.entrevistado.all()[0].comunidad.nombre)
+        #primera producto    primera area sembrada   primera area cosechada  primera produccion  razon
+        productos = Producto.objects.all()
+        #primera
+        for producto in productos:
+            fila.append(producto.nombre)
+            try: 
+                encuesta_producto = encuesta.primera.get(producto=producto)
+                fila.append(encuesta_producto.area_sembrada)
+                fila.append(encuesta_producto.area_cosechada)
+                fila.append(encuesta_producto.produccion)
+                fila.append(encuesta_producto.perdida.nombre)
+            except:
+                fila.append(0)
+                fila.append(0)
+                fila.append(0)
+                fila.append('')
+
+         #Postrera       
+        for producto in productos:
+           fila.append(producto.nombre)
+           try: 
+               encuesta_producto = encuesta.postrera.get(producto=producto)
+               fila.append(encuesta_producto.area_sembrada)
+               fila.append(encuesta_producto.area_cosechada)
+               fila.append(encuesta_producto.produccion)
+               fila.append(encuesta_producto.perdida.nombre)
+           except:
+               fila.append(0)
+               fila.append(0)
+               fila.append(0)
+               fila.append('')
+
+        resultados.append(fila)
+
+    return render_to_response("encuesta/hoja_calculo.html", {'datos': resultados})
