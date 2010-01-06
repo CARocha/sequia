@@ -578,6 +578,13 @@ def grafo_nutricion(request):
             riesgo_v = 1 + riesgo_v
         for nutricion in encuesta.nutricion.filter(edad__range=(1,15), ninos__contains="ninos", brazalete__id=5):
             nosabe_v = 1 + nosabe_v
+    #total de la tabla para niños
+    total_v = normal_v + desnutrido_v + riesgo_v + nosabe_v
+    #mandando los datos para el porcentaje del grafico niños
+    p_normal_v = float(normal_v) / total_v
+    p_desnutrido_v = float(desnutrido_v) / total_v
+    p_riesgo_v = float(riesgo_v) / total_v
+    p_nosabe_v = float(nosabe_v) / total_v
     # solo para niñas
     for encuesta in gnutri:
         for nutricion in encuesta.nutricion.filter(ninos__contains="ninas").filter(brazalete__id=1):
@@ -588,10 +595,16 @@ def grafo_nutricion(request):
             riesgo_m = 1 + riesgo_m
         for nutricion in encuesta.nutricion.filter(edad__range=(1,15), ninos__contains="ninas", brazalete__id=5):
             nosabe_m = 1 + nosabe_m
-            
+    #total de la tabla para niñas
+    total_m = normal_m + desnutrido_m + riesgo_m + nosabe_m 
+    #mandando los datos para el porcentaje del grafico niños
+    p_normal_m = float(normal_m) / total_m
+    p_desnutrido_m = float(desnutrido_m) / total_m
+    p_riesgo_m = float(riesgo_m) / total_m
+    p_nosabe_m = float(nosabe_m) / total_m         
     #mandar los datos al utils solo de niños y niñas
-    lista1 = [normal_v,desnutrido_v,riesgo_v,nosabe_v]
-    lista2 = [normal_m,desnutrido_m,riesgo_m,nosabe_m]
+    lista1 = [p_normal_v,p_desnutrido_v,p_riesgo_v,p_nosabe_v]
+    lista2 = [p_normal_m,p_desnutrido_m,p_riesgo_m,p_nosabe_m]
     legends1 = ['Normal','Desnutrido','Riesgo desnutricion','No sabe']
     legends2 = ['Normal','Desnutrido','Riesgo desnutricion','No sabe']
     mensa1 = "Grafico Nutrición Niños"
