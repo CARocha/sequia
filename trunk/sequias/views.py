@@ -578,7 +578,6 @@ def grafo_nutricion(request):
             riesgo_v = 1 + riesgo_v
         for nutricion in encuesta.nutricion.filter(edad__range=(1,15), ninos__contains="ninos", brazalete__id=5):
             nosabe_v = 1 + nosabe_v
-    print nosabe_v
     # solo para niñas
     for encuesta in gnutri:
         for nutricion in encuesta.nutricion.filter(ninos__contains="ninas").filter(brazalete__id=1):
@@ -592,7 +591,6 @@ def grafo_nutricion(request):
             
     #mandar los datos al utils solo de niños y niñas
     lista1 = [normal_v,desnutrido_v,riesgo_v,nosabe_v]
-    print lista1
     lista2 = [normal_m,desnutrido_m,riesgo_m,nosabe_m]
     legends1 = ['Normal','Desnutrido','Riesgo desnutricion','No sabe']
     legends2 = ['Normal','Desnutrido','Riesgo desnutricion','No sabe']
