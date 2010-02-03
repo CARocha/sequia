@@ -481,8 +481,11 @@ def grafo_perdida(request):
     razon3_A=0
     for encuesta in gperdida:
         for apante in encuesta.apante.filter(producto__id=2):
-            maiz_s_A = apante.area_sembrada + maiz_s_A
-            maiz_c_A = apante.area_cosechada + maiz_c_A
+            try:
+                maiz_s_A = apante.area_sembrada + maiz_s_A
+                maiz_c_A = apante.area_cosechada + maiz_c_A
+            except:
+                pass
         for apante in encuesta.apante.filter(producto__id=3):
             frijol_s_A = apante.area_sembrada + frijol_s_A
             frijol_c_A = apante.area_cosechada + frijol_c_A
