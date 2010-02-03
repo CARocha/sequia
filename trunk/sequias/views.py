@@ -70,7 +70,7 @@ def get_entrevista(request, comunidad):
     lista = [(entrevista.id, entrevista.nombre) for entrevista in entrevistados]
     return HttpResponse(simplejson.dumps(lista), mimetype='application/javascript')
 
-#Vista para la perdida de la cosecha primera
+#Vista para la perdida de la cosecha primera, postrera y apante
 @session_required
 def perdidapostrera(request):
     fecha1=request.session['fecha_inicio']
@@ -101,8 +101,14 @@ def perdidapostrera(request):
         
     casos = perdida.count()
     #TODO: Sumatorias de maiz,frijol,sorgo CICLO PRIMERA
+    # 2=Maiz, 3=Frijol, 4=sorgo
+    sorgo_planea = perdida.filter(primera__producto__id=4).aggregate(Sum('primera__planea_siembra'))['primera__planea_siembra__sum']
     arroz_sembrada = perdida.filter(primera__producto__id=4).aggregate(Sum('primera__area_sembrada'))['primera__area_sembrada__sum']
+    #----------
+    frijol_planea = perdida.filter(primera__producto__id=3).aggregate(Sum('primera__planea_siembra'))['primera__planea_siembra__sum']
     frijol_sembrada = perdida.filter(primera__producto__id=3).aggregate(Sum('primera__area_sembrada'))['primera__area_sembrada__sum']
+    #------------
+    maiz_planea = perdida.filter(primera__producto__id=2).aggregate(Sum('primera__planea_siembra'))['primera__planea_siembra__sum']
     maiz_sembrada = perdida.filter(primera__producto__id=2).aggregate(Sum('primera__area_sembrada'))['primera__area_sembrada__sum']
     #TODO: area cosechada
     arroz_cosechada = perdida.filter(primera__producto__id=4).aggregate(Sum('primera__area_cosechada'))['primera__area_cosechada__sum']
@@ -139,9 +145,14 @@ def perdidapostrera(request):
     except:
         pass
     
-    #TODO: CICLO POSTRERA
+    #TODO: CICLO POSTRERA, arroz=sorgo :) :P
+    sorgo_planea_p = perdida.filter(postrera__producto__id=4).aggregate(Sum('postrera__planea_siembra'))['postrera__planea_siembra__sum']
     arroz_sembrada_P = perdida.filter(postrera__producto__id=4).aggregate(Sum('postrera__area_sembrada'))['postrera__area_sembrada__sum']
+    #---------
+    frijol_planea_p = perdida.filter(postrera__producto__id=3).aggregate(Sum('postrera__planea_siembra'))['postrera__planea_siembra__sum']
     frijol_sembrada_P = perdida.filter(postrera__producto__id=3).aggregate(Sum('postrera__area_sembrada'))['postrera__area_sembrada__sum']
+    #-----------
+    maiz_planea_p = perdida.filter(postrera__producto__id=2).aggregate(Sum('postrera__planea_siembra'))['postrera__planea_siembra__sum']
     maiz_sembrada_P = perdida.filter(postrera__producto__id=2).aggregate(Sum('postrera__area_sembrada'))['postrera__area_sembrada__sum'] 
     #TODO: area cosechada
     arroz_cosechada_P = perdida.filter(postrera__producto__id=4).aggregate(Sum('postrera__area_cosechada'))['postrera__area_cosechada__sum']
@@ -177,6 +188,51 @@ def perdidapostrera(request):
         maiz_rendi_P = maiz_produccion_P / maiz_cosechada_P
     except:
         pass
+        
+    #Ciclo Apante
+    sorgo_planea_a = perdida.filter(apante__producto__id=4).aggregate(Sum('apante__planea_siembra'))['apante__planea_siembra__sum']
+    arroz_sembrada_A = perdida.filter(apante__producto__id=4).aggregate(Sum('apante__area_sembrada'))['apante__area_sembrada__sum']
+    #------------
+    frijol_planea_a = perdida.filter(apante__producto__id=3).aggregate(Sum('apante__planea_siembra'))['apante__planea_siembra__sum']
+    frijol_sembrada_A = perdida.filter(apante__producto__id=3).aggregate(Sum('apante__area_sembrada'))['apante__area_sembrada__sum']
+    #-------------
+    maiz_planea_a = perdida.filter(apante__producto__id=2).aggregate(Sum('apante__planea_siembra'))['apante__planea_siembra__sum']
+    maiz_sembrada_A = perdida.filter(apante__producto__id=2).aggregate(Sum('apante__area_sembrada'))['apante__area_sembrada__sum']
+    #TODO: area cosechada
+    arroz_cosechada_A = perdida.filter(apante__producto__id=4).aggregate(Sum('apante__area_cosechada'))['apante__area_cosechada__sum']
+    frijol_cosechada_A = perdida.filter(apante__producto__id=3).aggregate(Sum('apante__area_cosechada'))['apante__area_cosechada__sum']
+    maiz_cosechada_A = perdida.filter(apante__producto__id=2).aggregate(Sum('apante__area_cosechada'))['apante__area_cosechada__sum']
+    #TODO:area perdida
+    try:
+        arroz_perdida_A = (arroz_sembrada_A - arroz_cosechada_A)
+    except:
+        pass
+    try:
+        frijol_perdida_A = (frijol_sembrada_A - frijol_cosechada_A)
+    except:
+        pass
+    try:
+        maiz_perdida_A = (maiz_sembrada_A - maiz_cosechada_A)
+    except:
+        pass
+    #TODO: produccion
+    arroz_produccion_A = perdida.filter(apante__producto__id=4).aggregate(Sum('apante__produccion'))['apante__produccion__sum']
+    frijol_produccion_A = perdida.filter(apante__producto__id=3).aggregate(Sum('apante__produccion'))['apante__produccion__sum']
+    maiz_produccion_A = perdida.filter(apante__producto__id=2).aggregate(Sum('apante__produccion'))['apante__produccion__sum']
+    #TODO: rendimientos
+    try:
+        arroz_rendi_A = arroz_produccion_A / arroz_cosechada_A
+    except:
+        pass
+    try:
+        frijol_rendi_A = frijol_produccion_A / frijol_cosechada_A
+    except:
+        pass
+    try:
+        maiz_rendi_A = maiz_produccion_A / maiz_cosechada_A
+    except:
+        pass
+    
     return render_to_response("encuesta/perdida.html", locals())
 
 @session_required    
@@ -353,24 +409,27 @@ def grafo_perdida(request):
         for primera in encuesta.primera.filter(producto__id=2):
             maiz_s = primera.area_sembrada + maiz_s
             maiz_c = primera.area_cosechada + maiz_c
-    for encuesta in gperdida:
+#    for encuesta in gperdida:
         for primera in encuesta.primera.filter(producto__id=3):
             frijol_s = primera.area_sembrada + frijol_s
             frijol_c = primera.area_cosechada + frijol_c
-    for encuesta in gperdida:
+#    for encuesta in gperdida:
         for primera in encuesta.primera.filter(producto__id=4):
             sorgo_s = primera.area_sembrada + sorgo_s
             sorgo_c = primera.area_cosechada + sorgo_c
     #Razones de perdida primera
-    for encuesta in gperdida:
-        for primera in encuesta.primera.filter(perdida__id=1):
-            razon1 = primera.perdida.id + razon1
-    for encuesta in gperdida:
-        for primera in encuesta.primera.filter(perdida__id=2):
-            razon2 = primera.perdida.id + razon2
-    for encuesta in gperdida:
-        for primera in encuesta.primera.filter(perdida__id=3):
-            razon3 = primera.perdida.id + razon3
+    razon1 = gperdida.filter(primera__perdida__id=1).count()
+    razon2 = gperdida.filter(primera__perdida__id=2).count()
+    razon3 = gperdida.filter(primera__perdida__id=3).count()
+#    for encuesta in gperdida:
+#        for primera in encuesta.primera.filter(perdida__id=1):
+#            razon1 = primera.perdida.id + razon1
+#    for encuesta in gperdida:
+#        for primera in encuesta.primera.filter(perdida__id=2):
+#            razon2 = primera.perdida.id + razon2
+#    for encuesta in gperdida:
+#        for primera in encuesta.primera.filter(perdida__id=3):
+#            razon3 = primera.perdida.id + razon3
     #Esto es para postrera
     maiz_s_P = 0
     maiz_c_P = 0
@@ -389,25 +448,51 @@ def grafo_perdida(request):
         for postrera in encuesta.postrera.filter(producto__id=2):
             maiz_s_P = postrera.area_sembrada + maiz_s_P
             maiz_c_P = postrera.area_cosechada + maiz_c_P
-    for encuesta in gperdida:
+#    for encuesta in gperdida:
         for postrera in encuesta.postrera.filter(producto__id=3):
             frijol_s_P = postrera.area_sembrada + frijol_s_P
             frijol_c_P = postrera.area_cosechada + frijol_c_P
-    for encuesta in gperdida:
+#    for encuesta in gperdida:
         for postrera in encuesta.postrera.filter(producto__id=4):
             sorgo_s_P = postrera.area_sembrada + sorgo_s_P
             sorgo_c_P = postrera.area_cosechada + sorgo_c_P
     #Razones de perdidas postrera
+    razon1_p = gperdida.filter(postrera__perdida__id=1).count()
+    razon2_p = gperdida.filter(postrera__perdida__id=2).count()
+    razon3_p = gperdida.filter(postrera__perdida__id=3).count()
+#    for encuesta in gperdida:
+#        for postrera in encuesta.postrera.filter(perdida__id=1):
+#            razon1_p = primera.perdida.id + razon1_p
+#    for encuesta in gperdida:
+#        for postrera in encuesta.postrera.filter(perdida__id=2):
+#            razon2_p = postrera.perdida.id + razon2_p
+#    for encuesta in gperdida:
+#        for postrera in encuesta.postrera.filter(perdida__id=3):
+#            razon3_p = postrera.perdida.id + razon3_p            
+    #Esto es para apante
+    maiz_s_A=0
+    maiz_c_A=0
+    frijol_s_A=0
+    frijol_c_A=0
+    sorgo_s_A=0
+    sorgo_c_A=0
+    razon1_A=0
+    razon2_A=0
+    razon3_A=0
     for encuesta in gperdida:
-        for postrera in encuesta.postrera.filter(perdida__id=1):
-            razon1_p = primera.perdida.id + razon1_p
-    for encuesta in gperdida:
-        for postrera in encuesta.postrera.filter(perdida__id=2):
-            razon2_p = postrera.perdida.id + razon2_p
-    for encuesta in gperdida:
-        for postrera in encuesta.postrera.filter(perdida__id=3):
-            razon3_p = postrera.perdida.id + razon3_p
-
+        for apante in encuesta.apante.filter(producto__id=2):
+            maiz_s_A = apante.area_sembrada + maiz_s_A
+            maiz_c_A = apante.area_cosechada + maiz_c_A
+        for apante in encuesta.apante.filter(producto__id=3):
+            frijol_s_A = apante.area_sembrada + frijol_s_A
+            frijol_c_A = apante.area_cosechada + frijol_c_A
+        for apante in encuesta.apante.filter(producto__id=4):
+            sorgo_s_A = apante.area_sembrada + sorgo_s_A
+            sorgo_c_A = apante.area_cosechada + sorgo_c_A
+    #Razones de perdida apante
+    razon1_A = gperdida.filter(apante__perdida__id=1).count()
+    razon2_A = gperdida.filter(apante__perdida__id=2).count()
+    razon3_A = gperdida.filter(apante__perdida__id=3).count()
     #Calculacion de las perdidas de primera 
     resta = maiz_s - maiz_c
     resta_f = frijol_s - frijol_c
@@ -416,6 +501,11 @@ def grafo_perdida(request):
     resta_P = maiz_s_P - maiz_c_P
     resta_f_P = frijol_s_P - frijol_c_P
     resta_s_P = sorgo_s_P - sorgo_c_P
+    #Claculacion de las perdidas de apante
+    resta_A = maiz_s_A - maiz_c_A
+    resta_f_A = frijol_s_A - frijol_c_A
+    resta_s_A = sorgo_s_A - sorgo_c_A
+    
     #Calculacion de los porcentajes de primera
     p_c = (float(maiz_c)) *100
     p_p = (float(resta)) *100
@@ -442,6 +532,19 @@ def grafo_perdida(request):
     p_razon1_p= (float(razon1_p)) *100
     p_razon2_p= (float(razon2_p)) *100
     p_razon3_p= (float(razon3_p)) *100
+    #Calculacion de los porcentajes de Apante
+    p_c_A = (float(maiz_c_A)) *100
+    p_p_A = (float(resta_A)) *100
+    
+    p_c_f_A = (float(frijol_c_A)) *100
+    p_p_f_A = (float(resta_f_A)) *100
+    
+    p_c_s_A = (float(sorgo_c_A)) * 100
+    p_p_s_A = (float(resta_s_A)) *100
+    
+    p_razon1_A = (float(razon1_A)) *100
+    p_razon2_A = (float(razon2_A)) *100
+    p_razon3_A = (float(razon3_A)) *100
     #envios de los datos a utils solo primera
     lista = [p_c,p_p]
     lista1 = [p_c_f,p_p_f]
@@ -468,6 +571,19 @@ def grafo_perdida(request):
     mensa1_P = "Grafico Frijol"
     mensa2_P = "Grafico Sorgo"
     mensa3_P = "Grafico razones de perdida"
+    #envios de los datos a utils solo para apante
+    lista_A = [p_c_A,p_p_A]
+    lista1_A = [p_c_f_A,p_p_f_A]
+    lista2_A = [p_c_s_A,p_p_s_A]
+    lista3_A = [p_razon1_A,p_razon2_A,p_razon3_A]
+    legends_A = ['Area Cosechada','Area Perdida']
+    legends1_A = ['Area Cosechada','Area Perdida']
+    legends2_A = ['Area Cosechada','Area Perdida']
+    legends3_A = ['Sequia','Mala semilla','plaga']
+    mensa_A = "Grafico Maiz"
+    mensa1_A = "Grafico Frijol"
+    mensa2_A = "Grafico Sorgo"
+    mensa3_A = "Grafico razones de perdida"
     #Envios de las url solo para primera
     url = grafos.make_graph(lista, legends, mensa, return_json=False)
     url1 = grafos.make_graph(lista1, legends1, mensa1, return_json=False)
@@ -478,6 +594,12 @@ def grafo_perdida(request):
     url4 = grafos.make_graph(lista1_P, legends1_P, mensa1_P, return_json=False)
     url5 = grafos.make_graph(lista2_P, legends2_P, mensa2_P, return_json=False)
     url7 = grafos.make_graph(lista3_P, legends3_P, mensa3_P, return_json=False)
+    #Envios de las url para apante
+    url8 = grafos.make_graph(lista_A,legends_A,mensa_A, return_json=False)
+    url9 = grafos.make_graph(lista1_A,legends1_A,mensa1_A,return_json=False)
+    url10 = grafos.make_graph(lista2_A,legends2_A,mensa2_A,return_json=False)
+    url11 = grafos.make_graph(lista3_A,legends3_A,mensa3_A, return_json=False)
+    
     
     return render_to_response("encuesta/grafos.html", locals())
                                                        
