@@ -487,11 +487,17 @@ def grafo_perdida(request):
             except:
                 pass
         for apante in encuesta.apante.filter(producto__id=3):
-            frijol_s_A = apante.area_sembrada + frijol_s_A
-            frijol_c_A = apante.area_cosechada + frijol_c_A
+            try:
+                frijol_s_A = apante.area_sembrada + frijol_s_A
+                frijol_c_A = apante.area_cosechada + frijol_c_A
+            except:
+                pass
         for apante in encuesta.apante.filter(producto__id=4):
-            sorgo_s_A = apante.area_sembrada + sorgo_s_A
-            sorgo_c_A = apante.area_cosechada + sorgo_c_A
+            try:
+                sorgo_s_A = apante.area_sembrada + sorgo_s_A
+                sorgo_c_A = apante.area_cosechada + sorgo_c_A
+            except:
+                pass
     #Razones de perdida apante
     razon1_A = gperdida.filter(apante__perdida__id=1).count()
     razon2_A = gperdida.filter(apante__perdida__id=2).count()
