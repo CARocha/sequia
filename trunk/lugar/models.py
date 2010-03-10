@@ -32,7 +32,7 @@ class Microcuenca(models.Model):
 class Comunidad(models.Model):
 	municipio = models.ForeignKey(Municipio)
 	microcuenca = models.ForeignKey(Microcuenca,null=True,blank=True)
-	nombre = models.CharField(max_length=40)
+	nombre = models.CharField(max_length=40, unique = True)
 
 	class Meta:
 		verbose_name_plural="Comunidad"

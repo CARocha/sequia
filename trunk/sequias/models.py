@@ -48,7 +48,7 @@ class Producto(models.Model):
     def __unicode__(self):
         return self.nombre
 class Perdida(models.Model):
-    nombre = models.CharField('Nombre o Razón de pérdida', max_length=200, help_text="Introduzca la Razón de la perdida")
+    nombre = models.CharField('Nombre o Razón de pérdida', max_length=200, help_text="Introduzca la Razón de la perdida", unique = True)
     
     class Meta:
         verbose_name_plural = "Razon de perdida"
@@ -131,7 +131,7 @@ class Disponibilidad(models.Model):
         verbose_name_plural = "Sobre la disponibilidad de alimentos"
 
 class Brazalete(models.Model):
-    estado = models.CharField(max_length=200)
+    estado = models.CharField(max_length=200, unique = True)
 
     def __unicode__(self):
         return self.estado
