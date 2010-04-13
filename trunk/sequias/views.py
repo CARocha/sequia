@@ -97,7 +97,7 @@ def perdidapostrera(request):
         entre = request.session['entrevistado'].id
         perdida = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=entre)
     else:
-        perdida = Encuesta.objects.all()
+        perdida = Encuesta.objects.filter(fecha__range=(fecha1,fecha2))
         
     casos = perdida.count()
     #TODO: Sumatorias de maiz,frijol,sorgo CICLO PRIMERA
@@ -261,7 +261,7 @@ def disponibilidad(request):
         entre = request.session['entrevistado'].id
         dispo = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=entre)
     else:
-        dispo = Encuesta.objects.all()
+        dispo = Encuesta.objects.filter(fecha__range=(fecha1,fecha2))
         
     casos = dispo.count()
     #TODO: sumas de toda la tabla disponibilidad
@@ -326,7 +326,7 @@ def nutricion(request):
         entre = request.session['entrevistado'].id
         nutri = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=entre)
     else:
-        nutri = Encuesta.objects.all()
+        nutri = Encuesta.objects.filter(fecha__range=(fecha1,fecha2))
         
     casos = nutri.count()
     # niños de 1-5 años
@@ -389,7 +389,7 @@ def grafo_perdida(request):
         entre = request.session['entrevistado']
         gperdida = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=entre)
     else:
-        gperdida = Encuesta.objects.all()
+        gperdida = Encuesta.objects.filter(fecha__range=(fecha1,fecha2))
         
     casos = gperdida.count()
     maiz_s = 0
@@ -638,7 +638,7 @@ def grafo_nutricion(request):
         entre = request.session['entrevistado']
         gnutri = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=entre)
     else:
-        gnutri = Encuesta.objects.all()
+        gnutri = Encuesta.objects.filter(fecha__range=(fecha1,fecha2))
         
     casos = gnutri.count()
 #    normal_v = 0
@@ -712,7 +712,7 @@ def grafo_disponibilidad(request):
         entre = request.session['entrevistado']
         gdispo = Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=entre)
     else:
-        gdispo = Encuesta.objects.all()
+        gdispo = Encuesta.objects.filter(fecha__range=(fecha1,fecha2))
         
     casos = gdispo.count()
     #conteo del maiz
@@ -818,7 +818,7 @@ def __hoja_calculo__(request):
         entre = request.session['entrevistado']
         encuestas= Encuesta.objects.filter(fecha__range=(fecha1,fecha2)).filter(entrevistado__nombre=entre)
     else:
-        encuestas = Encuesta.objects.all()
+        encuestas = Encuesta.objects.filter(fecha__range=(fecha1,fecha2))
 
     resultados = []
 
