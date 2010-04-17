@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Departamento(models.Model):
-	nombre = models.CharField(max_length=40)
+	nombre = models.CharField(max_length=40, unique = True)
 
 	class Meta:
 		verbose_name_plural="Departamento"
@@ -12,7 +12,7 @@ class Departamento(models.Model):
 
 class Municipio(models.Model):
 	departamento = models.ForeignKey(Departamento)
-	nombre = models.CharField(max_length=40)
+	nombre = models.CharField(max_length=40, unique = True)
     
 	class Meta:
 		verbose_name_plural = "Municipio"
@@ -32,7 +32,7 @@ class Microcuenca(models.Model):
 class Comunidad(models.Model):
 	municipio = models.ForeignKey(Municipio)
 	microcuenca = models.ForeignKey(Microcuenca,null=True,blank=True)
-	nombre = models.CharField(max_length=40, unique = True)
+	nombre = models.CharField(max_length=40)
 
 	class Meta:
 		verbose_name_plural="Comunidad"
