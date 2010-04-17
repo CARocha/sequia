@@ -22,6 +22,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+#    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 
@@ -29,10 +30,13 @@ MEDIA_ROOT = os.path.join(SITE_ROOT,'media')
 MEDIA_URL = '/media'
 TEMPLATE_DIRS = (
 SITE_ROOT+"/templates",
+"/home/crocha/proyectos/django/sequia/debug_toolbar/templates",
+
 )
 ROOT_URLCONF = 'urls'
 
 INSTALLED_APPS = (
+#    'debug_toolbar',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -43,3 +47,4 @@ INSTALLED_APPS = (
     'lugar',
     'sequias',
 )
+INTERNAL_IPS = ('127.0.0.1',)

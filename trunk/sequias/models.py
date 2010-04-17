@@ -110,8 +110,8 @@ class Apante(models.Model):
     class Meta:
         verbose_name_plural="Sobre siembre de Apante"
         
-    def __unicode__(self):
-        return self.semilla
+    #def __unicode__(self):
+     #   return self.semilla
     
 class Disponibilidad(models.Model):
     content_type = models.ForeignKey(ContentType)
