@@ -1,0 +1,313 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{% block title %}Sondeo sobre Impacto de la sequia en Nicaragua{% endblock %}</title>
+</head>
+		{% block content %}
+		Números de casos: {{ casos }} familias
+		<b>Filtros</b> :: Departamento: <i>{{ request.session.departamento.nombre }}</i> | Municipio: <i> {{request.session.municipio.nombre}}</i> | Comunidad:<i> {{request.session.comunidad.nombre}}</i> | Entrevistado: <i> {{ request.session.entrevistado.nombre }}</i></div>
+		
+		
+		<table>
+<caption>Tabla Perdida de Primera</caption>
+<thead>
+         <tr>
+				 <th>Areas</th>
+				 <th>Maíz</th>
+                 <th>Frijol</th>
+                 <th>Sorgo</th>
+         </tr>
+   </thead>
+<tr>
+				 <td>Area planificada a sembrar (Mz)</td>
+                 <td>{{ maiz_planea }}</td>
+                 <td>{{ frijol_planea }}</td>
+				 <td>{{ sorgo_planea }}</td>
+</tr>
+<tr>
+				 <td>Area Sembrada (Mz)</td>
+                 <td>{{ maiz_sembrada }}</td>
+                 <td>{{ frijol_sembrada }}</td>
+				 <td>{{ arroz_sembrada }}</td>
+</tr>
+<tr>
+				 <td>Area Cosechada (Mz)</td>
+                 <td>{{ maiz_cosechada }}</td>
+                 <td>{{ frijol_cosechada }}</td>
+				 <td>{{ arroz_cosechada }}</td>
+</tr>
+<tr>
+				 <td>Area Perdida (Mz)</td>
+                 <td>{{ maiz_perdida }}</td>
+                 <td>{{ frijol_perdida }}</td>
+				 <td>{{ arroz_perdida }}</td>
+</tr>
+<tr>
+				 <td>Producción (qq)</td>
+                 <td>{{ maiz_produccion }}</td>
+                 <td>{{ frijol_produccion }}</td>
+				 <td>{{ arroz_produccion }}</td>
+</tr>
+<tr>
+				 <td>Rendimiento(qq/Mz)</td>
+                 <td>{{ maiz_rendi|floatformat:2 }}</td>
+                 <td>{{ frijol_rendi|floatformat:2 }}</td>
+				 <td>{{ arroz_rendi|floatformat:2 }}</td>
+</tr>
+</table>
+<table>
+<caption>Tabla Perdida de Postrera</caption>
+<thead>
+         <tr>
+				 <th>Areas</th>
+				 <th>Maíz</th>
+                 <th>Frijol</th>
+                 <th>Sorgo</th>
+         </tr>
+   </thead>
+<tr>
+				 <td>Area planificada a sembrar (Mz)</td>
+                 <td>{{ maiz_planea_p }}</td>
+                 <td>{{ frijol_planea_p }}</td>
+				 <td>{{ sorgo_planea_p }}</td>
+</tr>
+<tr>
+				 <td>Area Sembrada (Mz)</td>
+                 <td>{{ maiz_sembrada_P }}</td>
+                 <td>{{ frijol_sembrada_P }}</td>
+				 <td>{{ arroz_sembrada_P }}</td>
+</tr>
+<tr>
+				 <td>Area Cosechada (Mz)</td>
+                 <td>{{ maiz_cosechada_P }}</td>
+                 <td>{{ frijol_cosechada_P }}</td>
+				 <td>{{ arroz_cosechada_P }}</td>
+</tr>
+<tr>
+				 <td>Area Perdida (Mz)</td>
+                 <td>{{ maiz_perdida_P }}</td>
+                 <td>{{ frijol_perdida_P }}</td>
+				 <td>{{ arroz_perdida_P }}</td>
+</tr>
+<tr>
+				 <td>Producción (qq)</td>
+                 <td>{{ maiz_produccion_P }}</td>
+                 <td>{{ frijol_produccion_P }}</td>
+				 <td>{{ arroz_produccion_P }}</td>
+</tr>
+<tr>
+				 <td>Rendimiento(qq/Mz)</td>
+                 <td>{{ maiz_rendi_P|floatformat:2 }}</td>
+                 <td>{{ frijol_rendi_P|floatformat:2 }}</td>
+				 <td>{{ arroz_rendi_P|floatformat:2 }}</td>
+</tr>
+</table>
+<table>
+<caption>Tabla Perdida de Apante</caption>
+<thead>
+         <tr>
+				 <th>Areas</th>
+				 <th>Maíz</th>
+                 <th>Frijol</th>
+                 <th>Sorgo</th>
+         </tr>
+   </thead>
+<tr>
+				 <td>Area planificada a sembrar (Mz)</td>
+                 <td>{{ maiz_planea_a }}</td>
+                 <td>{{ frijol_planea_a }}</td>
+				 <td>{{ sorgo_planea_a }}</td>
+</tr>
+<tr>
+				 <td>Area Sembrada (Mz)</td>
+                 <td>{{ maiz_sembrada_A }}</td>
+                 <td>{{ frijol_sembrada_A }}</td>
+				 <td>{{ arroz_sembrada_A }}</td>
+</tr>
+<tr>
+				 <td>Area Cosechada (Mz)</td>
+                 <td>{{ maiz_cosechada_A }}</td>
+                 <td>{{ frijol_cosechada_A }}</td>
+				 <td>{{ arroz_cosechada_A }}</td>
+</tr>
+<tr>
+				 <td>Area Perdida (Mz)</td>
+                 <td>{{ maiz_perdida_A }}</td>
+                 <td>{{ frijol_perdida_A }}</td>
+				 <td>{{ arroz_perdida_A }}</td>
+</tr>
+<tr>
+				 <td>Producción (qq)</td>
+                 <td>{{ maiz_produccion_A }}</td>
+                 <td>{{ frijol_produccion_A }}</td>
+				 <td>{{ arroz_produccion_A }}</td>
+</tr>
+<tr>
+				 <td>Rendimiento(qq/Mz)</td>
+                 <td>{{ maiz_rendi_A|floatformat:2 }}</td>
+                 <td>{{ frijol_rendi_A|floatformat:2 }}</td>
+				 <td>{{ arroz_rendi_A|floatformat:2 }}</td>
+</tr>
+</table>
+<h2> graficos para Primera</h2>
+<img src="{{ url_o }}" />
+<img src="{{ url1_o }}" />
+<img src="{{ url2 }}" />
+<img src="{{ url6 }}" />
+
+<h2> graficos para Postrera</h2>
+<img src="{{ url3 }}" />
+<img src="{{ url4 }}" />
+<img src="{{ url5 }}" />
+<img src="{{ url7 }}" />
+
+<h2> graficos para Apante</h2>
+<img src="{{ url8 }}" />
+<img src="{{ url9 }}" />
+<img src="{{ url10 }}" />
+<img src="{{ url11 }}" />
+
+<h2> Disponibilidad </h2>
+<table>
+<caption>Tabla Disponibilidad de alimentos</caption>
+<thead>
+         <tr>
+				 <th>Consumidores</th>
+				 <th>#</th>
+                 <th>Alimentos</th>
+                 <th>Total(qq)</th>
+				 <th>Promedio por Familia (qq)</th>
+         </tr>
+   </thead>
+<tr>
+				 <td>Total de adultos</td>
+                 <td>{{ total_adulto }}</td>
+                 <td>Maiz</td>
+				 <td>{{ total_maiz }}</td>
+				 <td>{{ prom_maiz|floatformat:2 }}</td>
+</tr>
+<tr>
+				 <td>Total niños/niñas</td>
+                 <td>{{ total_ninos }}</td>
+                 <td>Frijol</td>
+				 <td>{{ total_frijol }}</td>
+				 <td>{{ prom_frijol|floatformat:2 }}</td>
+</tr>
+<tr>
+				 <td>Total vacas</td>
+                 <td>{{ total_vacas }}</td>
+                 <td>sorgo</td>
+				 <td>{{ total_sorgo }}</td>
+				 <td>{{ prom_sorgo|floatformat:2 }}</td>
+</tr>
+<tr>
+				 <td>Total cerdos</td>
+                 <td>{{ total_cerdos }}</td>
+                 <td></td>
+				 <td></td>
+				 <td></td>
+</tr>
+<tr>
+				 <td>Total gallinas</td>
+                 <td>{{ total_gallinas }}</td>
+                 <td></td>
+				 <td></td>
+				 <td></td>
+</tr>
+</table>
+
+<table>
+<caption>Tabla Disponibilidad de alimentos</caption>
+<thead>
+         <tr>
+				 <th>Criterios</th>
+				 <th>Disponibilidad en dias</th>
+         </tr>
+   </thead>
+<tr>
+				 <td>El Maíz es consumido solamente por humanos</td>
+                 <td>{{ criterio1|floatformat:2 }}</td>
+</tr>
+<tr>
+				 <td>El Frijol es consumido por humanos</td>
+                 <td>{{ criterio2|floatformat:2 }}</td>
+</tr>
+<tr>
+				 <td>El Maíz y Sorgo son consumidos por humanos y animales</td>
+                 <td>{{ criterio3|floatformat:2 }}</td>                 
+</tr>
+</table>
+<h2>Graficos disponibilidad</h2>
+<img src="{{ url_disp }}" />
+<img src="{{ url_disp_formula }}" />
+
+<h2> tablas de Nutrición </h2>
+<table>
+<caption>Tabla Estado de Nutrición niños</caption>
+<thead>
+         <tr>
+				 <th>Edad</th>
+				 <th>Normal</th>
+                 <th>Riesgos</th>
+                 <th>Desnutrición</th>
+				 <th>No sabe</th>
+         </tr>
+</thead>
+<tr>
+				 <td>1-5 años</td>
+                 <td>{{ ninos_normal }}</td>
+                 <td>{{ ninos_riesgo }}</td>
+				 <td>{{ ninos_desnutrido }}</td>
+				 <td>{{ ninos_nosabe }}</td>
+</tr>
+<tr>
+				 <td>6-10 años</td>
+                 <td>{{ ninos_normal_s }}</td>
+                 <td>{{ ninos_riesgo_s }}</td>
+				 <td>{{ ninos_desnutrido_s }}</td>
+				 <td>{{ ninos_nosabe_s }}</td>
+</tr>
+<tr>
+				 <td>11-15 años</td>
+                 <td>{{ ninos_normal_o }}</td>
+                 <td>{{ ninos_riesgo_o }}</td>
+				 <td>{{ ninos_desnutrido_o }}</td>
+				 <td>{{ ninos_nosabe_o }}</td>
+</tr>
+</table>
+<table>
+<caption>Tabla Estado de Nutrición niñas</caption>
+<thead>
+         <tr>
+				 <th>Edad</th>
+				 <th>Normal</th>
+                 <th>Riesgos</th>
+                 <th>Desnutrición</th>
+				 <th>No sabe</th>
+         </tr>
+</thead>
+<tr>
+				 <td>1-5 años</td>
+                 <td>{{ ninas_normal }}</td>
+                 <td>{{ ninas_riesgo }}</td>
+				 <td>{{ ninas_desnutrido }}</td>
+				 <td>{{ ninas_nosabe }}</td>
+</tr>
+<tr>
+				 <td>6-10 años</td>
+                 <td>{{ ninas_normal_s }}</td>
+                 <td>{{ ninas_riesgo_s }}</td>
+				 <td>{{ ninas_desnutrido_s }}</td>
+				 <td>{{ ninas_nosabe_s }}</td>
+</tr>
+<tr>
+				 <td>11-15 años</td>
+                 <td>{{ ninas_normal_o }}</td>
+                 <td>{{ ninas_riesgo_o }}</td>
+				 <td>{{ ninas_desnutrido_o }}</td>
+				 <td>{{ ninas_nosabe_o }}</td>
+</tr>
+</table>
+<img src="{{ url }}" />
+<img src="{{ url1 }}" />
+		{% endblock%}
