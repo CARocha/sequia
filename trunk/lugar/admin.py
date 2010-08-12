@@ -3,12 +3,14 @@ from lugar.models import Departamento, Municipio, Microcuenca, Comunidad
 
 class ComunidadAdmin(admin.ModelAdmin):
 	list_display = ['nombre', 'municipio']
+	
 class DepartamentoAdmin(admin.ModelAdmin):
 	pass
 class MicrocuencaAdmin(admin.ModelAdmin):
 	pass
 class MunicipioAdmin(admin.ModelAdmin):
 	list_display = ['nombre', 'departamento']
+	search_fields = ['nombre']
 
 
 admin.site.register(Departamento,DepartamentoAdmin )
