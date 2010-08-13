@@ -1260,7 +1260,6 @@ def __hoja_words__(request):
 #----------------- comienzo de la Disponibilidad -----------------
     dispo = encuestas
     casos = dispo.count()
-    print casos
     #TODO: sumas de toda la tabla disponibilidad
     total_adulto= dispo.aggregate(Sum('disponibilidad__adultos_casa'))['disponibilidad__adultos_casa__sum']
     total_ninos=dispo.aggregate(Sum('disponibilidad__ninos_casa'))['disponibilidad__ninos_casa__sum']
