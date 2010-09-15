@@ -14,7 +14,7 @@ line_types = [SimpleLineChart]
 
 def make_graph(data, legends, message=None, 
                axis_labels=None, steps=4, return_json = True,
-               type=PieChart2D, size=(320, 250), multiline=False):
+               type=PieChart3D, size=(320, 200), multiline=False):
 
     if (type in pie_types):
         graph = __pie_graphic__(data, legends, size, type)
@@ -114,8 +114,8 @@ def __bar_graphic__(data, legends, axis_labels, size, steps,
     else:
         graph.add_data(data)
     
-    graph.set_colours([ 'FFBC13','22A410','E6EC23','2B2133','BD0915','3D43BD'])
-    graph.set_bar_width(44)
+    graph.set_colours([ '395421','687829','654E36','2B2133','BD0915','3D43BD'])
+    graph.set_bar_width(64)
     graph.set_legend(legends)
     graph.set_legend_position('b')
     
